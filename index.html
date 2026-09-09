@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-  <title>1000 Codes • 2010 ChatGPT Master Prompts</title>
+  <title>1000 Codes • 2000+ AI Master Prompts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -635,6 +635,218 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius-lg);
       color: var(--text-muted);
+    }
+
+
+
+    /* ========================================================================
+       AI DICTIONARY
+       ======================================================================== */
+    .ai-dictionary-trigger {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 1px solid transparent;
+      background:
+        linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
+        linear-gradient(115deg, var(--accent), #22d3ee, #a78bfa, var(--accent)) border-box;
+      background-size: 100% 100%, 300% 300%;
+      animation: aiOutlineFlow 5s linear infinite;
+      box-shadow: 0 0 0 1px rgba(99,102,241,.08), 0 8px 28px rgba(99,102,241,.12);
+      white-space: nowrap;
+    }
+    .ai-dictionary-trigger::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      z-index: -1;
+      background: conic-gradient(from 0deg, transparent 0 18%, rgba(255,255,255,.24) 24%, transparent 31% 100%);
+      animation: aiShine 4s linear infinite;
+      pointer-events: none;
+    }
+    .ai-dictionary-trigger:hover {
+      border-color: transparent;
+      box-shadow: 0 0 24px rgba(99,102,241,.24), 0 12px 34px rgba(99,102,241,.16);
+      transform: translateY(-2px);
+    }
+    .ai-dictionary-trigger .ai-trigger-icon { font-size: 1rem; filter: drop-shadow(0 0 7px rgba(99,102,241,.65)); }
+    @keyframes aiOutlineFlow { to { background-position: 0 0, 300% 0; } }
+    @keyframes aiShine { to { transform: rotate(360deg); } }
+
+    .ai-dictionary-modal-backdrop {
+      padding: 0;
+      align-items: stretch;
+      justify-content: stretch;
+      overflow: hidden;
+    }
+    .ai-dictionary-modal {
+      width: 100vw;
+      min-width: 100vw;
+      max-width: none;
+      height: 100dvh;
+      min-height: 100dvh;
+      max-height: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 0;
+      align-items: stretch;
+      text-align: left;
+      background: var(--modal-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: none;
+    }
+    .ai-dictionary-modal > .modal-close {
+      z-index: 5;
+      top: max(12px, env(safe-area-inset-top));
+      right: max(12px, env(safe-area-inset-right));
+      width: 40px;
+      height: 40px;
+      font-size: 1.6rem;
+      background: rgba(0,0,0,.10);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .ai-dictionary-header {
+      padding: max(14px, env(safe-area-inset-top)) 24px 12px;
+      border-bottom: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      flex: 0 0 auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .ai-dictionary-heading-row { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-right:34px; }
+    .ai-dictionary-title-wrap { min-width:0; }
+    .ai-dictionary-title {
+      margin: 0;
+      font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--text-main);
+    }
+    .ai-dictionary-subtitle { margin: 6px 0 0; color:var(--text-muted); font-size:.82rem; line-height:1.45; }
+    .ai-dictionary-count { font-size:.75rem; font-weight:800; color:var(--accent); white-space:nowrap; }
+    .ai-dictionary-controls { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; margin-top:12px; }
+    .ai-dictionary-search-wrap { position:relative; }
+    .ai-dictionary-search {
+      width:100%; height:44px; box-sizing:border-box; padding:0 16px 0 45px;
+      border-radius:var(--radius-md); border:1px solid var(--glass-border); background:var(--glass-bg-card);
+      color:var(--text-main); font:600 .9rem var(--font-main); outline:none;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .ai-dictionary-search:focus { border-color:var(--glass-border-focus); box-shadow:0 0 0 3px rgba(99,102,241,.12); }
+    .ai-dictionary-search-icon { position:absolute; left:15px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
+    .ai-dictionary-category {
+      height:46px; width:100%; border-radius:14px; border:1px solid var(--glass-border); background:var(--glass-bg-card);
+      color:var(--text-main); padding:0 12px; font:600 .82rem var(--font-main); outline:none;
+    }
+    .ai-dictionary-category-scroll {
+      margin-top: 10px;
+      min-height: 44px;
+      flex: 0 0 auto;
+      overflow: visible;
+    }
+    .ai-dictionary-category-chips {
+      padding: 4px 36px 6px;
+      scroll-padding-inline: 36px;
+      cursor: grab;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
+    }
+    .ai-dictionary-category-chips:active { cursor: grabbing; }
+    .ai-dictionary-category-chips .pill-chip {
+      padding: 8px 16px;
+      font-size: .82rem;
+    }
+    .ai-dictionary-category-scroll .carousel-nav-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--scroll-arrow-bg);
+      border-color: var(--glass-border);
+    }
+    .ai-dictionary-category-scroll .carousel-nav-btn.left { left: -2px; }
+    .ai-dictionary-category-scroll .carousel-nav-btn.right { right: -2px; }
+    @supports not (background: color-mix(in srgb, white 50%, black)) {
+      .ai-dictionary-category-scroll .carousel-nav-btn { background: var(--glass-bg-card); }
+    }
+    .ai-dictionary-list {
+      min-height:0; flex:1 1 auto; overflow:auto; overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch; padding:12px 20px max(28px, env(safe-area-inset-bottom));
+      scrollbar-width:thin;
+    }
+    .ai-dictionary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; align-items:start; }
+    .ai-tool-item {
+      min-width:0; border:1px solid var(--glass-border); border-radius:var(--radius-md); background:var(--glass-bg-card);
+      overflow:hidden; transition:transform .18s ease, border-color .18s ease, background .18s ease;
+      box-shadow: var(--glass-shadow);
+    }
+    .ai-tool-item:hover { transform:translateY(-1px); border-color:var(--glass-border-focus); background:var(--glass-bg); }
+    .ai-tool-row { display:grid; grid-template-columns:minmax(0,1fr) 34px; align-items:center; min-height:48px; }
+    .ai-tool-link {
+      appearance:none; border:0; background:transparent; color:var(--text-main); text-align:left; cursor:pointer;
+      padding:12px 8px 12px 14px; font:750 .83rem var(--font-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .ai-tool-link:hover { color:var(--accent); }
+    .ai-tool-expand {
+      width:30px; height:30px; margin-right:4px; border-radius:9px; border:1px solid transparent;
+      background:transparent; color:var(--text-muted); cursor:pointer; display:grid; place-items:center;
+      transition:transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .ai-tool-expand:hover { background:rgba(99,102,241,.1); color:var(--text-main); }
+    .ai-tool-expand.open svg { transform:rotate(180deg); }
+    .ai-tool-purpose {
+      display:grid; grid-template-rows:0fr; transition:grid-template-rows .24s ease, padding .24s ease;
+      color:var(--text-muted); font-size:.72rem; line-height:1.45; background:var(--drawer-bg); border-top:1px solid transparent;
+    }
+    .ai-tool-purpose > div { min-height:0; overflow:hidden; padding:0 12px; }
+    .ai-tool-item.expanded .ai-tool-purpose { grid-template-rows:1fr; border-top-color:var(--glass-border); }
+    .ai-tool-item.expanded .ai-tool-purpose > div { padding:10px 12px 12px; }
+    .ai-dictionary-empty { grid-column:1/-1; padding:50px 20px; text-align:center; color:var(--text-muted); border:1px dashed var(--glass-border); border-radius:16px; }
+    .ai-dictionary-loading { grid-column:1/-1; padding:60px 20px; text-align:center; color:var(--text-muted); }
+    .ai-dictionary-loading::after {
+      content:""; display:block; width:28px; height:28px; margin:14px auto 0; border-radius:50%;
+      border:2px solid var(--glass-border); border-top-color:var(--accent); animation:aiSpin .8s linear infinite;
+    }
+    .ai-dictionary-list { scrollbar-gutter: stable; }
+    @media (min-width: 1100px) {
+      .ai-dictionary-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    }
+    @media (max-width: 1099px) and (min-width: 901px) {
+      .ai-dictionary-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @keyframes aiSpin { to { transform:rotate(360deg); } }
+    @media (max-width: 900px) { .ai-dictionary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width: 640px) {
+      .ai-dictionary-trigger .ai-trigger-label { display:none; }
+      .ai-dictionary-trigger { min-width:44px; min-height:44px; padding:10px 12px; }
+      .ai-dictionary-modal-backdrop { padding:0; }
+      .ai-dictionary-modal { width:100%; height:100%; min-height:100%; border-radius:0; }
+      .ai-dictionary-header { padding:calc(env(safe-area-inset-top) + 10px) 10px 9px; }
+      .ai-dictionary-heading-row { padding-right:32px; gap:10px; }
+      .ai-dictionary-title { font-size:1.18rem; }
+      .ai-dictionary-subtitle { font-size:.76rem; max-width:calc(100vw - 70px); }
+      .ai-dictionary-count { font-size:.68rem; }
+      .ai-dictionary-controls { grid-template-columns:1fr; gap:7px; margin-top:9px; }
+      .ai-dictionary-search { height:44px; min-height:44px; font-size:16px; }
+      .ai-dictionary-category-scroll { margin-top:6px; min-height:42px; }
+      .ai-dictionary-category-chips { padding-left:34px; padding-right:34px; gap:7px; }
+      .ai-dictionary-category-chips .pill-chip { padding:8px 12px; font-size:.75rem; }
+      .ai-dictionary-category-scroll .carousel-nav-btn { width:32px; height:32px; }
+      .ai-dictionary-grid { grid-template-columns:1fr; gap:7px; }
+      .ai-dictionary-list { padding:10px 10px max(24px, env(safe-area-inset-bottom)); }
+      .ai-tool-row { min-height:50px; grid-template-columns:minmax(0,1fr) 42px; }
+      .ai-tool-link { min-width:0; min-height:50px; padding:12px 8px 12px 13px; font-size:.82rem; }
+      .ai-tool-expand { width:38px; height:38px; margin-right:2px; }
+      .ai-tool-purpose { font-size:.74rem; }
+    }
+    @media (max-width: 380px) {
+      .ai-dictionary-title { font-size:1.18rem; }
+      .ai-dictionary-subtitle { display:none; }
+      .ai-dictionary-header { padding-left:10px; padding-right:10px; }
+      .ai-dictionary-list { padding-left:8px; padding-right:8px; }
     }
 
     .modal-backdrop {
@@ -1546,6 +1758,41 @@
       border-radius: 4px;
     }
 
+    /* Final AI directory overrides: true edge-to-edge fullscreen, including after generic modal rules. */
+    .modal-backdrop.ai-dictionary-modal-backdrop {
+      padding: 0 !important;
+      align-items: stretch !important;
+      justify-content: stretch !important;
+    }
+    .modal-backdrop.ai-dictionary-modal-backdrop .ai-dictionary-modal {
+      width: 100vw !important;
+      max-width: none !important;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
+      min-height: 100dvh !important;
+      min-width: 100vw !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+    }
+    .ai-dictionary-modal .ai-dictionary-list {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      flex: 1 1 auto;
+    }
+    body.ai-dictionary-open { overflow: hidden; }
+    @media (max-width: 640px) {
+      .modal-backdrop.ai-dictionary-modal-backdrop .ai-dictionary-modal {
+        min-width: 100vw;
+        width: 100vw !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+      }
+      .ai-dictionary-header { padding-bottom: 8px; }
+      .ai-dictionary-list { padding-left: 8px; padding-right: 8px; }
+      .ai-tool-item { border-radius: 12px; }
+      .ai-tool-link { font-size: .84rem; }
+    }
   </style>
 </head>
 <body>
@@ -1558,6 +1805,10 @@
       </div>
 
       <div class="header-actions">
+        <button class="glass-btn ai-dictionary-trigger" id="aiDictionaryTrigger" type="button" aria-haspopup="dialog" aria-controls="aiDictionaryModal" title="Explore AI Dictionary">
+          <span class="ai-trigger-icon">✦</span>
+          <span class="ai-trigger-label">AI Dictionary</span>
+        </button>
         <div class="menu-wrapper">
           <button class="glass-btn btn-icon" id="menuToggle" aria-label="Menu">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
@@ -1612,6 +1863,41 @@
     </header>
 
     <input type="file" id="importFileInput" accept=".json" style="display: none;" />
+
+    <!-- AI DICTIONARY -->
+    <div class="modal-backdrop ai-dictionary-modal-backdrop" id="aiDictionaryModal" role="dialog" aria-modal="true" aria-labelledby="aiDictionaryTitle">
+      <div class="glass-modal ai-dictionary-modal">
+        <button class="close-modal-btn modal-close" type="button" aria-label="Close AI Dictionary">×</button>
+        <div class="ai-dictionary-header">
+          <div class="ai-dictionary-heading-row">
+            <div class="ai-dictionary-title-wrap">
+              <h2 class="ai-dictionary-title" id="aiDictionaryTitle">AI Dictionary</h2>
+              <p class="ai-dictionary-subtitle">Discover AI tools by name, purpose, category, or use case. Click a name to open the tool.</p>
+            </div>
+            <div class="ai-dictionary-count" id="aiDictionaryCount">Loading…</div>
+          </div>
+          <div class="ai-dictionary-controls">
+            <div class="ai-dictionary-search-wrap">
+              <svg class="ai-dictionary-search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+              <input id="aiDictionarySearch" class="ai-dictionary-search" type="search" placeholder="Search AI name, purpose, category, use case…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="ai-dictionary-category-scroll category-scroll-container" aria-label="AI tool categories">
+            <button class="carousel-nav-btn left ai-category-nav" id="aiDictionaryCategoryLeft" type="button" title="Scroll categories left" aria-label="Scroll AI categories left">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="filter-scroll ai-dictionary-category-chips" id="aiDictionaryCategoryChips"></div>
+            <button class="carousel-nav-btn right ai-category-nav" id="aiDictionaryCategoryRight" type="button" title="Scroll categories right" aria-label="Scroll AI categories right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+        <div class="ai-dictionary-list" id="aiDictionaryList">
+          <div class="ai-dictionary-grid" id="aiDictionaryGrid"><div class="ai-dictionary-loading">Loading AI tools…</div></div>
+        </div>
+      </div>
+    </div>
+
 
     <section class="control-panel">
       <div class="search-box-wrapper">
@@ -4415,17 +4701,839 @@
       modalEl.querySelectorAll(".modal-close").forEach(btn => {
         btn.addEventListener("click", () => {
           modalEl.classList.remove("active");
-          stopAllArcadeGames();
+          if (onOpenCleanup) onOpenCleanup();
+          else stopAllArcadeGames();
         });
       });
 
       modalEl.addEventListener("click", (e) => {
         if (e.target === modalEl) {
           modalEl.classList.remove("active");
-          stopAllArcadeGames();
+          if (onOpenCleanup) onOpenCleanup();
+          else stopAllArcadeGames();
         }
       });
     }
+
+
+    // Never let arcade games run while the page is in the background.
+    // Keep the exact game state so returning to the tab resumes from the same moment.
+    let arcadeSuspended = false;
+    function resumeVisibleArcadeGame() {
+      if (!arcadeSuspended || document.hidden || !activeGame) return;
+      arcadeSuspended = false;
+      if (activeGame === "snake" && snakeGameView.style.display !== "none" && aboutModal.classList.contains("active") && !snakePaused) {
+        snakeInterval = setInterval(updateSnakeGame, 100);
+      } else if (activeGame === "space" && spaceGameView.style.display !== "none" && contactModal.classList.contains("active")) {
+        spaceAnimationId = requestAnimationFrame(updateSpaceGame);
+      } else if (activeGame === "tetris" && tetrisGameView.style.display !== "none" && coffeeModal.classList.contains("active")) {
+        tetrisInterval = setInterval(updateTetrisGame, 480);
+      } else {
+        stopAllArcadeGames();
+      }
+    }
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        if (activeGame) {
+          cancelGameRestart();
+          if (snakeInterval) { clearInterval(snakeInterval); snakeInterval = null; }
+          if (spaceAnimationId) { cancelAnimationFrame(spaceAnimationId); spaceAnimationId = null; }
+          if (tetrisInterval) { clearInterval(tetrisInterval); tetrisInterval = null; }
+          arcadeSuspended = true;
+        }
+      } else {
+        resumeVisibleArcadeGame();
+      }
+    });
+    window.addEventListener("pagehide", () => { arcadeSuspended = false; stopAllArcadeGames(); }, { passive: true });
+    window.addEventListener("beforeunload", () => { arcadeSuspended = false; stopAllArcadeGames(); }, { passive: true });
+
+    /* ========================================================================
+       AI DICTIONARY — remote 1000+ catalog with local fallback
+       ======================================================================== */
+    const aiDictionaryTrigger = document.getElementById("aiDictionaryTrigger");
+    const aiDictionaryModal = document.getElementById("aiDictionaryModal");
+    const aiDictionarySearch = document.getElementById("aiDictionarySearch");
+    const aiDictionaryCategoryChips = document.getElementById("aiDictionaryCategoryChips");
+    const aiDictionaryCategoryLeft = document.getElementById("aiDictionaryCategoryLeft");
+    const aiDictionaryCategoryRight = document.getElementById("aiDictionaryCategoryRight");
+    const aiDictionaryGrid = document.getElementById("aiDictionaryGrid");
+    const aiDictionaryCount = document.getElementById("aiDictionaryCount");
+    let aiDictionaryData = [];
+    let aiDictionaryLoaded = false;
+    let aiDictionaryLoadingPromise = null;
+    let aiSelectedCategory = "ALL";
+
+    const AI_FALLBACK_TOOLS = [
+      ["ChatGPT","General-purpose AI assistant for writing, coding, analysis, research, and image tasks.","https://chatgpt.com","Chat / Productivity"],
+      ["Claude","AI assistant focused on reasoning, writing, coding, analysis, and long-context work.","https://claude.ai","Chat / Productivity"],
+      ["Gemini","Google AI assistant for multimodal work, research, writing, coding, and image understanding.","https://gemini.google.com","Chat / Research"],
+      ["Perplexity","AI answer engine for web research, search, and cited information discovery.","https://www.perplexity.ai","Search / Research"],
+      ["Grok","Conversational AI for reasoning, research, writing, and current-information workflows.","https://grok.com","Chat / Research"],
+      ["DeepSeek","AI models and assistant for reasoning, coding, mathematics, and general chat.","https://chat.deepseek.com","Chat / Coding"],
+      ["Qwen","Alibaba AI family for chat, reasoning, coding, multimodal tasks, and agents.","https://chat.qwen.ai","Chat / Coding"],
+      ["Mistral Le Chat","Mistral's AI assistant for conversation, reasoning, writing, and productivity.","https://chat.mistral.ai","Chat / Productivity"],
+      ["Midjourney","Generates and explores AI images and visual concepts from prompts.","https://www.midjourney.com","Image Generation"],
+      ["Leonardo AI","Creates AI images, creative assets, and visual content with controllable styles.","https://leonardo.ai","Image Generation"],
+      ["Ideogram","AI image generation with strong typography and graphic-design capabilities.","https://ideogram.ai","Image Generation / Design"],
+      ["Adobe Firefly","Generative AI for images, design, text effects, and creative editing.","https://firefly.adobe.com","Image / Design"],
+      ["Canva AI","AI-assisted design, presentations, images, writing, and visual content creation.","https://www.canva.com","Design / Productivity"],
+      ["Runway","AI video generation, image-to-video, editing, and creative video workflows.","https://runwayml.com","Video Generation"],
+      ["Kling AI","Generates AI video and images with text, image, and motion workflows.","https://klingai.com","Video Generation"],
+      ["Pika","AI video creation and transformation from text, images, and creative effects.","https://pika.art","Video Generation"],
+      ["Luma AI","AI tools for video, image, 3D, and creative visual generation.","https://lumalabs.ai","Video / 3D"],
+      ["HeyGen","AI avatar videos, talking presenters, translation, dubbing, and marketing videos.","https://www.heygen.com","Avatar / Video"],
+      ["Synthesia","Creates presenter-led AI videos from scripts with digital avatars and voices.","https://www.synthesia.io","Avatar / Video"],
+      ["ElevenLabs","AI voice generation, text-to-speech, speech-to-speech, and audio tools.","https://elevenlabs.io","Voice / Audio"],
+      ["Suno","Generates songs and music from natural-language descriptions.","https://suno.com","Music Generation"],
+      ["Udio","AI music creation platform for generating songs and musical ideas.","https://www.udio.com","Music Generation"],
+      ["Cursor","AI code editor for understanding, generating, editing, and navigating codebases.","https://cursor.com","Coding"],
+      ["GitHub Copilot","AI coding assistant for code completion, chat, debugging, and development workflows.","https://github.com/features/copilot","Coding"],
+      ["Replit","Browser-based development platform with AI-assisted app and code creation.","https://replit.com","Coding / App Building"],
+      ["Lovable","AI-powered app and website builder that turns natural-language ideas into software.","https://lovable.dev","App Building"],
+      ["Bolt.new","AI development environment for generating and running web applications from prompts.","https://bolt.new","App Building / Coding"],
+      ["v0","AI interface and application generation tool focused on web UI and code.","https://v0.dev","UI / App Building"],
+      ["Gamma","AI-powered presentations, documents, and visual content creation.","https://gamma.app","Presentations / Documents"],
+      ["NotebookLM","AI research and note-taking assistant grounded in user-provided sources.","https://notebooklm.google.com","Research / Notes"],
+      ["Jasper","AI platform for marketing content, copywriting, and brand-focused content workflows.","https://www.jasper.ai","Marketing / Writing"],
+      ["Grammarly","AI writing assistant for grammar, rewriting, tone, and communication improvement.","https://www.grammarly.com","Writing"],
+      ["Zapier AI","AI-assisted workflow automation connecting apps and business processes.","https://zapier.com/ai","Automation"],
+      ["Make","Visual automation platform with AI-assisted workflows and integrations.","https://www.make.com","Automation"],
+      ["n8n","Workflow automation platform for connecting services, APIs, agents, and AI models.","https://n8n.io","Automation / Agents"],
+      ["Perplexity Labs","AI workspace for research, analysis, and creating useful outputs from complex tasks.","https://www.perplexity.ai","Research / Productivity"],
+      ["Hugging Face","Open AI/ML platform for models, datasets, demos, and machine-learning development.","https://huggingface.co","Models / Development"],
+      ["Replicate","Runs machine-learning and generative AI models through a developer-friendly platform and API.","https://replicate.com","Models / API"],
+      ["RunDiffusion","Cloud workspace for running Stable Diffusion and other generative image workflows.","https://rundiffusion.com","Image Generation"],
+      ["Photoroom","AI photo editing and product-image creation including background removal and generation.","https://www.photoroom.com","Photo Editing / Ecommerce"],
+      ["Remove.bg","Automatically removes image backgrounds and creates transparent cutouts.","https://www.remove.bg","Image Editing"],
+      ["Descript","AI-assisted video and podcast editing using text-based workflows and transcription.","https://www.descript.com","Video / Audio Editing"],
+      ["Otter.ai","AI meeting transcription, notes, summaries, and conversation search.","https://otter.ai","Meetings / Transcription"],
+      ["Fireflies.ai","Records, transcribes, summarizes, and extracts insights from meetings.","https://fireflies.ai","Meetings / Productivity"],
+      ["Notion AI","AI assistance inside notes, documents, databases, and team workspaces.","https://www.notion.so/product/ai","Productivity / Notes"],
+      ["Copy.ai","AI workflows and content generation for marketing, sales, and business teams.","https://www.copy.ai","Marketing / Sales"],
+      ["Writesonic","AI writing, SEO, research, and content creation tools.","https://writesonic.com","Writing / SEO"],
+      ["QuillBot","AI paraphrasing, summarizing, grammar, and writing improvement tools.","https://quillbot.com","Writing"],
+      ["Character.AI","Conversational AI characters and roleplay-oriented chat experiences.","https://character.ai","Chat / Entertainment"],
+      ["Pi","Personal conversational AI for advice, brainstorming, and everyday discussion.","https://pi.ai","Chat / Personal AI"],
+      ["Murf","AI voice generation and voiceover creation for presentations and content.","https://murf.ai","Voice / Audio"],
+      ["Descript","AI-powered editing and transcription for podcasts and video content.","https://www.descript.com","Video / Audio Editing"],
+      ["Beautiful.ai","AI-assisted presentation creation with automated layouts and design.","https://www.beautiful.ai","Presentations"],
+      ["Tome","AI storytelling and presentation creation for ideas and business content.","https://tome.app","Presentations"],
+      ["Gamma","Creates presentations, documents, and web-style visual pages with AI.","https://gamma.app","Presentations / Documents"],
+      ["Elicit","AI research assistant for finding, screening, and summarizing academic papers.","https://elicit.com","Research"],
+      ["Consensus","AI-powered academic search and evidence synthesis from research papers.","https://consensus.app","Research"],
+      ["SciSpace","AI research workspace for reading, understanding, and querying academic papers.","https://scispace.com","Research / Education"],
+      ["Wolfram Alpha","Computational knowledge engine useful for math, science, data, and factual calculations.","https://www.wolframalpha.com","Math / Research"],
+      ["Gamma AI","AI content and presentation creation platform for structured visual documents.","https://gamma.app","Presentations"],
+      ["Sora","Generative AI video creation from text and other visual inputs.","https://sora.com","Video Generation"],
+      ["Google Veo","Generative video model and creation tools from Google.","https://deepmind.google/models/veo/","Video Generation"],
+      ["Adobe Podcast","AI-assisted audio recording, enhancement, cleanup, and editing.","https://podcast.adobe.com","Audio"],
+      ["Krisp","AI noise cancellation and audio enhancement for calls and meetings.","https://krisp.ai","Audio / Meetings"],
+      ["AssemblyAI","AI speech and audio intelligence APIs for transcription and analysis.","https://www.assemblyai.com","Speech / API"],
+      ["DeepL","AI translation and writing assistance across many languages.","https://www.deepl.com","Translation"],
+      ["Papago","AI-powered language translation and multilingual communication tools.","https://papago.naver.com","Translation"],
+      ["Mem","AI-powered personal knowledge and note-taking workspace.","https://mem.ai","Notes / Productivity"],
+      ["Rewind","Personal AI that helps search and recall information from your digital activity.","https://www.rewind.ai","Productivity / Memory"],
+      ["Clay","AI-assisted prospecting, enrichment, research, and go-to-market workflows.","https://www.clay.com","Sales / Marketing"],
+      ["Intercom Fin","AI customer support agent for answering questions and resolving support requests.","https://www.intercom.com/fin","Customer Support"],
+      ["ManyChat","Automation and AI-assisted messaging for social and customer conversations.","https://manychat.com","Marketing / Automation"],
+      ["HubSpot AI","AI features for marketing, sales, customer service, and CRM workflows.","https://www.hubspot.com","Business / Marketing"],
+      ["Salesforce Einstein","AI capabilities for CRM, sales, service, marketing, and business workflows.","https://www.salesforce.com/einstein/","Business / CRM"],
+      ["DataRobot","AI and machine-learning platform for building, deploying, and managing models.","https://www.datarobot.com","Data / ML"],
+      ["Julius AI","AI data analyst for asking questions about spreadsheets and datasets.","https://julius.ai","Data Analysis"],
+      ["Obviously AI","No-code AI for predictions and machine-learning workflows on business data.","https://www.obviously.ai","Data / Prediction"],
+      ["RunwayML","Creative AI platform for video generation and visual media workflows.","https://runwayml.com","Video / Creative"],
+      ["Kaedim","Generates 3D models and assets from images using AI-assisted workflows.","https://www.kaedim3d.com","3D"],
+      ["Meshy","AI 3D model and texture generation from text and images.","https://www.meshy.ai","3D"],
+      ["Tripo AI","AI 3D model generation from text and images.","https://www.tripo3d.ai","3D"],
+      ["Interior AI","AI-assisted interior design concepts and virtual staging.","https://interiorai.com","Architecture / Design"],
+      ["RoomGPT","Generates redesigned room concepts from uploaded room photos.","https://www.roomgpt.io","Interior Design"],
+      ["Looka","AI-assisted logo and brand identity generation.","https://looka.com","Branding / Design"],
+      ["Uizard","AI-powered UI design and prototyping from text, screenshots, and sketches.","https://uizard.io","UI / Design"],
+      ["Galileo AI","AI interface design and UI concept generation.","https://www.usegalileo.ai","UI / Design"],
+      ["Framer AI","AI-assisted website generation and design in Framer.","https://www.framer.com/ai/","Website Building"],
+      ["Durable","AI website builder and business setup tools.","https://durable.co","Website Building"],
+      ["10Web","AI-assisted WordPress website building and management.","https://10web.io","Website Building"],
+      ["Wix AI","AI-assisted website creation, content, and business site setup.","https://www.wix.com/ai","Website Building"],
+      ["Hostinger AI","AI tools for website creation, writing, branding, and hosting workflows.","https://www.hostinger.com/ai","Website Building"],
+      ["Cursor","AI-first code editor for software development.","https://cursor.com","Coding"],
+      ["Windsurf","AI coding environment with agentic development workflows.","https://windsurf.com","Coding"],
+      ["Aider","AI pair programming tool that works in local code repositories.","https://aider.chat","Coding"],
+      ["Cline","AI coding agent that can inspect and modify projects through an IDE workflow.","https://cline.bot","Coding / Agents"],
+      ["Continue","Open-source AI coding assistant for IDEs.","https://www.continue.dev","Coding"],
+      ["Tabnine","AI coding assistant for code completion and development productivity.","https://www.tabnine.com","Coding"],
+      ["Codeium","AI coding assistant and code acceleration tools.","https://codeium.com","Coding"],
+      ["Amazon Q Developer","AI coding and developer assistant from AWS.","https://aws.amazon.com/q/developer/","Coding / Cloud"],
+      ["Google Gemini Code Assist","AI coding assistance integrated with Google's developer ecosystem.","https://cloud.google.com/gemini/docs/codeassist","Coding"],
+      ["Sourcegraph Cody","AI coding assistant with codebase-aware search and assistance.","https://sourcegraph.com/cody","Coding"],
+      ["Blackbox AI","AI coding assistant for code generation, search, and developer workflows.","https://www.blackbox.ai","Coding"],
+      ["Phind","AI search and answer engine focused on developers and technical questions.","https://www.phind.com","Coding / Search"],
+      ["You.com","AI search and assistant platform with research and productivity capabilities.","https://you.com","Search / Productivity"],
+      ["Andi Search","AI search engine designed to answer questions and summarize web information.","https://andisearch.com","Search"],
+      ["Komo AI","AI-powered search and research assistant.","https://komo.ai","Search / Research"],
+      ["Exa","AI-native search and retrieval API for finding relevant web content.","https://exa.ai","Search / API"],
+      ["Tavily","Search API designed for AI agents and research applications.","https://tavily.com","Search / Agents"],
+      ["Firecrawl","Web crawling and extraction API that turns websites into AI-ready data.","https://www.firecrawl.dev","Search / Data"],
+      ["Browse AI","No-code website monitoring and data extraction using AI.","https://www.browse.ai","Automation / Data"],
+      ["Bardeen","AI browser automation and workflow automation platform.","https://www.bardeen.ai","Automation"],
+      ["Lindy","AI assistant and agent platform for automating personal and business workflows.","https://www.lindy.ai","Agents / Automation"],
+      ["Manus","General-purpose AI agent platform for completing multi-step tasks.","https://manus.im","Agents"],
+      ["AutoGPT","Open-source framework and agent project for autonomous task execution.","https://agpt.co","Agents"],
+      ["CrewAI","Framework for building collaborative multi-agent AI systems.","https://www.crewai.com","Agents / Development"],
+      ["LangChain","Framework and ecosystem for building applications and agents with language models.","https://www.langchain.com","AI Development"],
+      ["LangGraph","Framework for building stateful, controllable AI agent workflows.","https://www.langchain.com/langgraph","Agents / Development"],
+      ["LlamaIndex","Framework for connecting language models to data and knowledge sources.","https://www.llamaindex.ai","RAG / Development"],
+      ["Ollama","Runs and manages local language models on personal computers.","https://ollama.com","Local AI / Development"],
+      ["LM Studio","Desktop application for running and interacting with local AI models.","https://lmstudio.ai","Local AI"],
+      ["Jan","Open-source local AI assistant for running models privately.","https://jan.ai","Local AI / Chat"],
+      ["Open WebUI","Self-hosted interface for interacting with local and remote AI models.","https://openwebui.com","Local AI / Chat"],
+      ["ComfyUI","Node-based interface for advanced generative image and media workflows.","https://www.comfy.org","Image / Workflow"],
+      ["Stable Diffusion","Open generative image model ecosystem for text-to-image and image editing.","https://stability.ai/stable-diffusion","Image Generation"],
+      ["FLUX","Generative image model family for high-quality image creation and editing.","https://blackforestlabs.ai","Image Generation"],
+      ["Ideogram","AI image generator known for typography and design-oriented images.","https://ideogram.ai","Image Generation"],
+      ["Playground AI","AI image creation and editing for art, design, and social content.","https://playground.com","Image Generation"],
+      ["Krea","Real-time AI image and creative canvas tools.","https://www.krea.ai","Image / Design"],
+      ["NightCafe","AI art generation and creative community platform.","https://nightcafe.studio","Image Generation"],
+      ["Artbreeder","AI-assisted collaborative image and character creation.","https://www.artbreeder.com","Image / Art"],
+      ["DreamStudio","Web interface for generating images with Stability AI models.","https://dreamstudio.ai","Image Generation"],
+      ["Getimg.ai","AI image generation, editing, outpainting, and creative image tools.","https://getimg.ai","Image Editing"],
+      ["Clipdrop","AI-powered image editing, cleanup, background removal, and generation tools.","https://clipdrop.co","Image Editing"],
+      ["Topaz Photo AI","AI photo enhancement, denoise, sharpen, and upscale tools.","https://www.topazlabs.com/topaz-photo-ai","Photo Enhancement"],
+      ["Magnific AI","AI image upscaling and detail enhancement.","https://magnific.ai","Image Upscaling"],
+      ["Let's Enhance","AI image upscaling and enhancement for photos and graphics.","https://letsenhance.io","Image Upscaling"],
+      ["Remini","AI photo enhancement, restoration, and portrait improvement.","https://remini.ai","Photo Enhancement"],
+      ["FaceApp","AI-powered photo transformations and portrait editing.","https://www.faceapp.com","Photo Editing"],
+      ["Magic Eraser","AI-assisted removal of unwanted objects from images.","https://www.magiceraser.io","Image Editing"],
+      ["Cleanup.pictures","AI image cleanup and object removal.","https://cleanup.pictures","Image Editing"],
+      ["Pixlr","Online photo editor with AI-powered creative tools.","https://pixlr.com","Photo Editing"],
+      ["Fotor","AI photo editing, design, enhancement, and generation platform.","https://www.fotor.com","Photo / Design"],
+      ["Picsart AI","AI-assisted image creation, editing, and design tools.","https://picsart.com","Photo / Design"],
+      ["PhotoRoom","AI product photography and background editing for commerce and creators.","https://www.photoroom.com","Photo / Ecommerce"],
+      ["CapCut","Video editor with AI effects, captions, generation, and enhancement tools.","https://www.capcut.com","Video Editing"],
+      ["OpusClip","AI video repurposing tool that turns long videos into short clips.","https://www.opus.pro","Video Editing"],
+      ["Pictory","AI video creation and repurposing from scripts, articles, and long videos.","https://pictory.ai","Video Creation"],
+      ["InVideo AI","AI video generation from text prompts and scripts.","https://invideo.io","Video Generation"],
+      ["VEED","Online video editor with AI subtitles, generation, cleanup, and content tools.","https://www.veed.io","Video Editing"],
+      ["Veed AI","AI tools for video creation, subtitles, dubbing, and social content.","https://www.veed.io/tools/ai","Video"],
+      ["Colossyan","AI presenter and training video generation platform.","https://www.colossyan.com","Avatar / Video"],
+      ["D-ID","AI digital humans and talking-avatar video generation.","https://www.d-id.com","Avatar / Video"],
+      ["Synthesys","AI voice and avatar generation for marketing and business content.","https://synthesys.io","Voice / Avatar"],
+      ["PlayHT","AI voice generation and text-to-speech platform.","https://play.ht","Voice / Audio"],
+      ["Resemble AI","AI voice generation, cloning, speech, and voice transformation.","https://www.resemble.ai","Voice / Audio"],
+      ["WellSaid","AI voice platform for professional voiceovers.","https://wellsaidlabs.com","Voice / Audio"],
+      ["Speechify","AI text-to-speech and reading assistant for documents and web content.","https://speechify.com","Voice / Accessibility"],
+      ["NaturalReader","Text-to-speech and AI reading assistance for documents and text.","https://www.naturalreaders.com","Voice / Accessibility"],
+      ["Whisper","Open speech recognition model for converting audio to text.","https://openai.com/research/whisper","Speech Recognition"],
+      ["Otter.ai","AI meeting transcription and summarization assistant.","https://otter.ai","Meetings"],
+      ["Avoma","AI meeting assistant for recording, transcription, notes, and conversation intelligence.","https://www.avoma.com","Meetings"],
+      ["Fathom","AI meeting assistant for transcripts, summaries, and action items.","https://fathom.video","Meetings"],
+      ["Granola","AI-powered meeting notes assistant designed to enhance notes from conversations.","https://www.granola.ai","Meetings / Notes"],
+      ["Read AI","AI meeting and communication analytics with summaries and insights.","https://www.read.ai","Meetings"],
+      ["Superhuman","AI-powered email and productivity workspace.","https://superhuman.com","Email / Productivity"],
+      ["Shortwave","AI-powered email client with search, summaries, and drafting.","https://www.shortwave.com","Email"],
+      ["Lavender","AI email coaching and optimization for sales communication.","https://www.lavender.ai","Email / Sales"],
+      ["Regie.ai","AI-assisted sales prospecting and outbound content generation.","https://www.regie.ai","Sales"],
+      ["Gong","Revenue intelligence platform using AI to analyze sales conversations and signals.","https://www.gong.io","Sales / Analytics"],
+      ["Drift","Conversational marketing and sales platform with AI capabilities.","https://www.drift.com","Marketing / Sales"],
+      ["Ada","AI customer service automation and support agent platform.","https://www.ada.cx","Customer Support"],
+      ["Forethought","AI support automation and customer service intelligence.","https://forethought.ai","Customer Support"],
+      ["Zendesk AI","AI tools for customer service automation and agent assistance.","https://www.zendesk.com/ai/","Customer Support"],
+      ["Freshworks Freddy AI","AI assistance for customer support, IT, and business workflows.","https://www.freshworks.com/freddy-ai/","Customer Support / Business"],
+      ["ClickUp AI","AI features for project management, docs, tasks, and team productivity.","https://clickup.com/ai","Productivity"],
+      ["Asana Intelligence","AI features for project management, planning, summaries, and work orchestration.","https://asana.com/product/ai","Productivity"],
+      ["Monday AI","AI-assisted project, workflow, and business management tools.","https://monday.com/product/ai","Productivity"],
+      ["Motion","AI-powered scheduling, planning, tasks, and calendar optimization.","https://www.usemotion.com","Productivity"],
+      ["Reclaim AI","AI calendar and time management for automatically protecting time for tasks and habits.","https://reclaim.ai","Productivity / Calendar"],
+      ["Clockwise","AI calendar optimization and meeting scheduling.","https://www.getclockwise.com","Calendar / Productivity"],
+      ["Mem.ai","AI knowledge management and note-taking.","https://mem.ai","Notes / Productivity"],
+      ["Reflect","AI note-taking and knowledge management workspace.","https://reflect.app","Notes / Productivity"],
+      ["Tana","AI-native workspace for structured notes and knowledge management.","https://tana.inc","Notes / Productivity"],
+      ["Heptabase","Visual knowledge management and research workspace with AI features.","https://heptabase.com","Research / Notes"],
+      ["Coda AI","AI assistance for docs, tables, and team workflows.","https://coda.io/product/ai","Productivity"],
+      ["Rows AI","AI-powered spreadsheet analysis and automation.","https://rows.com/ai","Spreadsheets / Data"],
+      ["Airtable AI","AI features for databases, content, workflows, and business operations.","https://www.airtable.com/ai","Data / Productivity"],
+      ["SheetAI","AI functions for working with spreadsheets and generating data-driven content.","https://www.sheetai.app","Spreadsheets"],
+      ["Formula Bot","AI assistant for spreadsheet formulas, data analysis, and SQL.","https://www.formulabot.com","Data / Spreadsheets"],
+      ["Julius AI","Conversational data analysis for spreadsheets and datasets.","https://julius.ai","Data Analysis"],
+      ["Tableau AI","AI capabilities for business intelligence, analytics, and data visualization.","https://www.tableau.com","Data / BI"],
+      ["Power BI Copilot","AI assistance for business intelligence, reports, data questions, and analysis.","https://www.microsoft.com/power-platform/products/power-bi","Data / BI"],
+      ["Dataiku","Enterprise AI and analytics platform for data science and machine learning workflows.","https://www.dataiku.com","Data / ML"],
+      ["H2O.ai","AI and machine learning platform for enterprise data science.","https://h2o.ai","Data / ML"],
+      ["Weights & Biases","ML development platform for experiment tracking, evaluation, and model workflows.","https://wandb.ai","ML / Development"],
+      ["Modal","Cloud platform for running AI and compute workloads programmatically.","https://modal.com","AI Infrastructure"],
+      ["Together AI","Cloud platform for inference, fine-tuning, and generative AI models.","https://www.together.ai","AI Infrastructure"],
+      ["GroqCloud","Fast inference platform for running language and multimodal models.","https://console.groq.com","AI Infrastructure"],
+      ["OpenRouter","API gateway providing access to many AI models through one interface.","https://openrouter.ai","AI API"],
+      ["Replicate","Platform and API for running generative AI models.","https://replicate.com","AI API"],
+      ["Fireworks AI","Inference and model platform for generative AI applications.","https://fireworks.ai","AI Infrastructure"],
+      ["Together AI","Model inference and fine-tuning platform for AI developers.","https://www.together.ai","AI Infrastructure"],
+      ["Pinecone","Vector database and retrieval platform for AI applications.","https://www.pinecone.io","RAG / Data"],
+      ["Weaviate","Open-source vector database for AI search and retrieval.","https://weaviate.io","RAG / Data"],
+      ["Qdrant","Vector database and similarity search engine for AI applications.","https://qdrant.tech","RAG / Data"],
+      ["Milvus","Open-source vector database for large-scale AI similarity search.","https://milvus.io","RAG / Data"],
+      ["Chroma","Open-source embedding and vector database for AI applications.","https://www.trychroma.com","RAG / Data"],
+      ["Supabase AI","AI-assisted database, backend, and developer tooling ecosystem.","https://supabase.com","Development / Data"],
+      ["Firebase AI","AI-assisted application development and Google Firebase tooling.","https://firebase.google.com","Development"],
+      ["Vercel AI SDK","Toolkit for building AI-powered applications with JavaScript and TypeScript.","https://ai-sdk.dev","Development"],
+      ["OpenAI API","API platform for building applications with OpenAI models.","https://platform.openai.com","AI API"],
+      ["Anthropic API","API platform for building applications with Claude models.","https://www.anthropic.com/api","AI API"],
+      ["Google AI Studio","Workspace for experimenting with and building applications using Gemini models.","https://aistudio.google.com","AI Development"],
+      ["Mistral AI","AI model and API platform for language and multimodal models.","https://mistral.ai","AI Models / API"],
+      ["Cohere","Enterprise AI platform for language models, retrieval, and generation.","https://cohere.com","AI Models / Enterprise"],
+      ["AI21 Labs","AI model and language technology platform for enterprise applications.","https://www.ai21.com","AI Models"],
+      ["Aleph Alpha","Enterprise AI and foundation-model platform.","https://www.aleph-alpha.com","AI Models"],
+      ["Stability AI","Generative AI models and creative media technologies.","https://stability.ai","AI Models / Creative"],
+      ["Black Forest Labs","AI image generation models and technologies including FLUX.","https://blackforestlabs.ai","AI Models / Image"],
+      ["Meta AI","Meta's AI assistant and model ecosystem.","https://www.meta.ai","Chat / Models"],
+      ["Microsoft Copilot","AI assistant integrated across Microsoft products and web experiences.","https://copilot.microsoft.com","Chat / Productivity"],
+      ["Amazon Q","AI assistant for business and developer workflows across AWS and enterprise systems.","https://aws.amazon.com/q/","Business / Coding"],
+      ["IBM watsonx","Enterprise AI platform for models, governance, data, and AI applications.","https://www.ibm.com/watsonx","Enterprise AI"],
+      ["Oracle AI","AI capabilities across Oracle cloud, data, and enterprise applications.","https://www.oracle.com/artificial-intelligence/","Enterprise AI"],
+      ["NVIDIA AI","AI software, models, developer tools, and accelerated computing ecosystem.","https://www.nvidia.com/en-us/ai/","AI Infrastructure"],
+      ["HuggingChat","Open-source model chat interface powered by Hugging Face models.","https://huggingface.co/chat","Chat / Open Source"],
+      ["LM Arena","Community-driven evaluation and comparison of AI models.","https://lmarena.ai","AI Evaluation"],
+      ["Artificial Analysis","AI model benchmarks and comparisons for quality, speed, and cost.","https://artificialanalysis.ai","AI Evaluation"],
+      ["Chatbot Arena","Leaderboard and evaluation platform for comparing language models.","https://lmarena.ai","AI Evaluation"],
+      ["GPTZero","AI-generated text detection and writing analysis.","https://gptzero.me","AI Detection"],
+      ["Originality.ai","AI detection and plagiarism checking for content publishers.","https://originality.ai","AI Detection"],
+      ["Winston AI","AI content detection and document analysis tools.","https://gowinston.ai","AI Detection"],
+      ["Turnitin","Academic integrity, similarity checking, and AI writing detection tools.","https://www.turnitin.com","Education / Detection"],
+      ["Photomath","AI-assisted math problem solving and explanation from photos.","https://photomath.com","Education / Math"],
+      ["Khanmigo","AI-powered tutoring and teaching assistant from Khan Academy.","https://www.khanmigo.ai","Education"],
+      ["Quizlet AI","AI study, tutoring, and learning tools integrated with Quizlet.","https://quizlet.com","Education"],
+      ["Duolingo Max","AI-powered language learning features and conversation practice.","https://www.duolingo.com","Education / Language"],
+      ["ELSA Speak","AI speech and pronunciation coaching for English learners.","https://elsaspeak.com","Education / Language"],
+      ["Socratic","AI-assisted homework and learning support for students.","https://socratic.org","Education"],
+      ["Gradescope","AI-assisted grading and assessment workflows for educators.","https://www.gradescope.com","Education"],
+      ["MagicSchool","AI tools for teachers, lesson planning, assessment, and classroom work.","https://www.magicschool.ai","Education"],
+      ["Brisk Teaching","AI-powered teaching tools for creating, adapting, and assessing educational content.","https://www.briskteaching.com","Education"],
+      ["Teachable Machine","Browser-based tool for creating simple machine-learning models.","https://teachablemachine.withgoogle.com","Education / ML"],
+      ["AIVA","AI music composition for creators, games, and media.","https://www.aiva.ai","Music"],
+      ["Soundraw","AI music generation for creators and commercial content.","https://soundraw.io","Music"],
+      ["Boomy","AI music creation platform for generating songs quickly.","https://boomy.com","Music"],
+      ["Mubert","AI-generated music and soundtracks for creators and businesses.","https://mubert.com","Music"],
+      ["Beatoven.ai","AI music generation for videos, podcasts, and content.","https://www.beatoven.ai","Music"],
+      ["Voicemod","AI voice effects and voice transformation for gaming and streaming.","https://www.voicemod.net","Voice / Gaming"],
+      ["Altered Studio","AI voice transformation and speech production tools.","https://www.altered.ai","Voice"],
+      ["Kits AI","AI voice and music tools for transforming and creating vocal performances.","https://www.kits.ai","Voice / Music"],
+      ["RVC","Open-source voice conversion ecosystem for AI voice transformation.","https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI","Voice / Open Source"],
+      ["Podcastle","AI podcast recording, editing, transcription, and voice generation platform.","https://podcastle.ai","Podcast / Audio"],
+      ["Riverside","Recording platform with AI transcription and content tools for podcasts and video.","https://riverside.fm","Podcast / Video"],
+      ["Podium","AI tools for podcast transcription, show notes, and content repurposing.","https://www.podium.page","Podcast"],
+      ["Castmagic","AI podcast repurposing into summaries, posts, articles, and marketing content.","https://www.castmagic.io","Podcast / Content"],
+      ["Beehiiv AI","AI tools for newsletter writing and content workflows.","https://www.beehiiv.com","Writing / Newsletter"],
+      ["Submagic","AI captions and short-form video editing for creators.","https://www.submagic.co","Video / Social"],
+      ["Captions","AI-powered video creation, captions, avatars, and editing for creators.","https://www.captions.ai","Video / Social"],
+      ["Opus Clip","AI clipping and repurposing for long-form video.","https://www.opus.pro","Video / Social"],
+      ["Predis.ai","AI social media content creation, design, captions, and scheduling.","https://predis.ai","Social Media"],
+      ["Ocoya","AI-assisted social media content creation and management.","https://www.ocoya.com","Social Media"],
+      ["Buffer AI","AI-assisted social media content generation and publishing workflows.","https://buffer.com/ai-assistant","Social Media"],
+      ["Hootsuite OwlyWriter AI","AI social post generation and content assistance inside Hootsuite.","https://www.hootsuite.com","Social Media"],
+      ["AdCreative.ai","AI-generated advertising creatives and marketing assets.","https://www.adcreative.ai","Advertising"],
+      ["Creatopy","AI-assisted ad creative and production workflows.","https://www.creatopy.com","Advertising"],
+      ["Smartly.io","AI-assisted advertising creative and campaign automation platform.","https://www.smartly.io","Advertising"],
+      ["Albert.ai","AI-powered digital marketing optimization and campaign management.","https://albert.ai","Marketing"],
+      ["Surfer SEO","AI-assisted SEO content optimization and content planning.","https://surferseo.com","SEO"],
+      ["Semrush","SEO and marketing platform with AI-powered research and content tools.","https://www.semrush.com","SEO / Marketing"],
+      ["Ahrefs","SEO research and content tools with AI-assisted features.","https://ahrefs.com","SEO"],
+      ["Frase","AI-assisted SEO research, writing, and content optimization.","https://www.frase.io","SEO / Writing"],
+      ["Scalenut","AI-powered SEO content research and writing platform.","https://www.scalenut.com","SEO / Writing"],
+      ["Outranking","AI SEO content strategy, optimization, and writing.","https://www.outranking.io","SEO"],
+      ["NeuronWriter","AI-assisted SEO content optimization and writing.","https://neuronwriter.com","SEO"],
+      ["MarketMuse","AI content planning, research, and SEO optimization platform.","https://www.marketmuse.com","SEO / Content"],
+      ["Surfer AI","AI-assisted article creation and SEO optimization.","https://surferseo.com","SEO / Writing"],
+      ["Originality.ai","AI content detection and plagiarism checking for publishers.","https://originality.ai","Detection / Writing"],
+      ["Copyscape","Plagiarism checking and content originality verification.","https://www.copyscape.com","Writing / Detection"],
+      ["Wordtune","AI rewriting, editing, summarizing, and writing assistance.","https://www.wordtune.com","Writing"],
+      ["Rytr","AI writing assistant for marketing, emails, social content, and copy.","https://rytr.me","Writing"],
+      ["Anyword","AI copywriting and marketing content generation.","https://anyword.com","Marketing / Writing"],
+      ["Simplified","AI content, design, social media, and marketing workspace.","https://simplified.com","Marketing / Design"],
+      ["Hypotenuse AI","AI content generation for ecommerce, marketing, and product copy.","https://www.hypotenuse.ai","Writing / Ecommerce"],
+      ["Katteb","AI writing platform focused on fact-oriented content generation.","https://katteb.com","Writing"],
+      ["LongShot AI","AI content creation and fact-checking for long-form writing.","https://www.longshot.ai","Writing / SEO"],
+      ["Lex.page","AI writing and document workspace.","https://lex.page","Writing"],
+      ["Sudowrite","AI writing assistant designed for fiction and creative writing.","https://sudowrite.com","Creative Writing"],
+      ["NovelAI","AI-assisted storytelling, writing, and image generation.","https://novelai.net","Creative Writing"],
+      ["Journable","AI-assisted journaling and reflection workspace.","https://journable.io","Personal Growth"],
+      ["Wysa","AI mental wellness and emotional support companion.","https://www.wysa.com","Wellbeing"],
+      ["Youper","AI mental wellness and emotional health companion.","https://www.youper.ai","Wellbeing"],
+      ["Woebot","Conversational mental health support and behavioral health tools.","https://woebothealth.com","Wellbeing"],
+      ["Ada Health","AI health assessment and symptom guidance platform.","https://ada.com","Healthcare"],
+      ["Infermedica","AI-powered symptom checking and healthcare decision support.","https://infermedica.com","Healthcare"],
+      ["Glass Health","AI clinical decision support and medical reasoning tools for clinicians.","https://glass.health","Healthcare"],
+      ["Abridge","AI clinical conversation documentation and medical note generation.","https://www.abridge.com","Healthcare"],
+      ["Nabla Copilot","AI clinical documentation assistant for healthcare professionals.","https://www.nabla.com","Healthcare"],
+      ["Nuance DAX","AI clinical documentation and ambient medical transcription.","https://www.microsoft.com/en-us/health-solutions/clinical-workflow/dax-copilot","Healthcare"],
+      ["Harvey","AI legal assistant for legal research, drafting, and professional workflows.","https://www.harvey.ai","Legal"],
+      ["CoCounsel","AI legal research and document analysis assistant from Thomson Reuters.","https://legal.thomsonreuters.com/en/products/cocounsel","Legal"],
+      ["Lexis+ AI","AI-powered legal research, drafting, and document analysis.","https://www.lexisnexis.com/en-us/products/lexis-plus-ai.page","Legal"],
+      ["Spellbook","AI contract drafting and review assistant for lawyers.","https://www.spellbook.legal","Legal"],
+      ["Clio Duo","AI-assisted legal practice management and workflow tools.","https://www.clio.com","Legal"],
+      ["Eightfold AI","AI talent intelligence and recruiting platform.","https://eightfold.ai","HR / Recruiting"],
+      ["HireVue","AI-assisted recruiting, assessments, and hiring workflows.","https://www.hirevue.com","HR / Recruiting"],
+      ["Paradox","Conversational AI recruiting and candidate engagement platform.","https://paradox.ai","HR / Recruiting"],
+      ["Textio","AI-assisted inclusive recruiting and workplace writing.","https://textio.com","HR / Writing"],
+      ["Rezi","AI resume builder and resume optimization platform.","https://www.rezi.ai","Career / Resume"],
+      ["Kickresume","AI-assisted resume and cover letter creation.","https://www.kickresume.com","Career / Resume"],
+      ["Teal","AI-powered job search, resume, and career management tools.","https://www.tealhq.com","Career"],
+      ["Final Round AI","AI interview preparation and interview assistance.","https://www.finalroundai.com","Career / Interview"],
+      ["Interview Warmup","AI-assisted interview practice and feedback.","https://grow.google/certificates/interview-warmup/","Career / Interview"],
+      ["Otto AI","AI workflow and task automation tools.","https://otto-ai.com","Automation"],
+      ["Zapier","App automation and workflow integration platform.","https://zapier.com","Automation"],
+      ["IFTTT","Automation platform connecting services and smart workflows.","https://ifttt.com","Automation"],
+      ["Pipedream","Developer-focused workflow automation and integrations.","https://pipedream.com","Automation / Development"],
+      ["Workato","Enterprise automation and integration platform with AI capabilities.","https://www.workato.com","Automation / Enterprise"],
+      ["UiPath","Enterprise automation and robotic process automation with AI.","https://www.uipath.com","Automation"],
+      ["Automation Anywhere","AI-powered enterprise automation and digital workers.","https://www.automationanywhere.com","Automation"],
+      ["Softr","No-code application builder with AI-assisted app generation.","https://www.softr.io","App Building"],
+      ["Glide","No-code app builder with AI-assisted app creation and data workflows.","https://www.glideapps.com","App Building"],
+      ["Bubble","No-code web application platform with AI-assisted development features.","https://bubble.io","App Building"],
+      ["FlutterFlow","Visual app builder with AI-assisted development workflows.","https://flutterflow.io","App Building"],
+      ["Builder.io","AI-assisted visual development and content creation platform.","https://www.builder.io","Web Development"],
+      ["Webflow AI","AI-assisted website and content workflows within Webflow.","https://webflow.com/ai","Web Design"],
+      ["WordPress AI","AI-assisted website and content creation in WordPress ecosystem.","https://wordpress.com/ai","Website Building"],
+      ["Elementor AI","AI website design, copy, code, and image assistance for WordPress.","https://elementor.com/ai/","Website Building"],
+      ["Hostinger Horizons","AI-assisted web app and website building.","https://www.hostinger.com/horizons","App Building"],
+      ["Base44","AI-powered application creation from natural-language instructions.","https://base44.com","App Building"],
+      ["Same.dev","AI-assisted website and application development.","https://same.dev","Web Development"],
+      ["Magic Patterns","AI-assisted UI and product design generation.","https://www.magicpatterns.com","UI / Design"],
+      ["Diagram","AI design tools for interfaces, diagrams, and product concepts.","https://diagram.com","Design"],
+      ["Relume","AI website sitemap, wireframe, and component generation.","https://www.relume.io","Web Design"],
+      ["Visily","AI-powered UI and wireframe design from prompts and screenshots.","https://www.visily.ai","UI / Design"],
+      ["Framer","Visual website builder with AI-assisted site generation.","https://www.framer.com","Web Design"],
+      ["Durable AI","AI website builder for small businesses and service providers.","https://durable.co","Web Design"],
+      ["Maket","AI-assisted architectural floor-plan and generative design platform.","https://www.maket.ai","Architecture"],
+      ["Planner 5D","AI-assisted home and interior design planning.","https://planner5d.com","Interior Design"],
+      ["Homestyler","AI-assisted interior design and visualization tools.","https://www.homestyler.com","Interior Design"],
+      ["GetFloorPlan","AI generation of 2D/3D floor plans and property visualizations.","https://getfloorplan.com","Real Estate / Design"],
+      ["ReImagineHome","AI interior design and room transformation ideas.","https://reimaginehome.ai","Interior Design"],
+      ["Architechtures","AI-powered generative design and architectural planning.","https://www.architechtures.com","Architecture"],
+      ["TestFit","AI-powered site planning and real estate feasibility analysis.","https://testfit.io","Real Estate / Architecture"],
+      ["Finchat","AI assistant for financial research and company analysis.","https://finchat.io","Finance"],
+      ["AlphaSense","AI-powered market intelligence and research platform.","https://www.alpha-sense.com","Finance / Research"],
+      ["Hebbia","AI knowledge and research assistant for complex business documents.","https://www.hebbia.com","Research / Business"],
+      ["BloombergGPT","AI research and language-model technology for financial applications.","https://www.bloomberg.com","Finance / AI"],
+      ["Kensho","AI-powered financial research and analytics tools.","https://www.kensho.com","Finance"],
+      ["Numerai","AI and machine-learning platform for quantitative finance and prediction tournaments.","https://numer.ai","Finance / ML"],
+      ["Composer","AI-assisted investing and portfolio automation platform.","https://www.composer.trade","Finance"],
+      ["TrendSpider","AI-assisted technical analysis and trading research tools.","https://trendspider.com","Finance / Trading"],
+      ["StockGPT","AI search and analysis focused on financial transcripts and market information.","https://www.stockgpt.ai","Finance / Search"],
+      ["TravelPerk AI","AI-assisted travel planning and business travel workflows.","https://www.travelperk.com","Travel"],
+      ["Roam Around","AI travel itinerary planning and destination recommendations.","https://www.roamaround.io","Travel"],
+      ["Wonderplan","AI travel itinerary and trip planning assistant.","https://wonderplan.ai","Travel"],
+      ["Trip Planner AI","AI itinerary generation and travel planning.","https://www.tripplanner.ai","Travel"],
+      ["Vacay Chatbot","AI trip planning assistant for travel ideas and recommendations.","https://usevacay.com","Travel"],
+      ["ChefGPT","AI recipe, meal planning, and cooking assistant.","https://www.chefgpt.xyz","Food / Lifestyle"],
+      ["DishGen","AI recipe generation and meal idea platform.","https://www.dishgen.com","Food"],
+      ["PlantNet","AI-assisted plant identification from photos.","https://plantnet.org","Nature / Recognition"],
+      ["Google Lens","Visual search and recognition for objects, text, products, and places.","https://lens.google.com","Vision / Search"],
+      ["TinEye","Reverse image search for finding image matches and origins.","https://tineye.com","Image Search"],
+      ["OCR.Space","OCR API and image-to-text extraction service.","https://ocr.space","OCR / API"],
+      ["Google Cloud Vision","Computer vision APIs for image analysis and recognition.","https://cloud.google.com/vision","Computer Vision"],
+      ["AWS Rekognition","Computer vision APIs for image and video analysis.","https://aws.amazon.com/rekognition/","Computer Vision"],
+      ["Azure AI Vision","Computer vision services for image analysis and document understanding.","https://azure.microsoft.com/products/ai-services/ai-vision","Computer Vision"],
+      ["Clarifai","Computer vision and multimodal AI platform for models and applications.","https://www.clarifai.com","Computer Vision / AI"],
+      ["Roboflow","Computer vision platform for datasets, training, and deployment.","https://roboflow.com","Computer Vision"],
+      ["LandingLens","Computer vision development and industrial inspection platform.","https://landing.ai","Computer Vision"],
+      ["Labelbox","Data labeling and AI training data platform.","https://labelbox.com","Data / ML"],
+      ["Scale AI","AI data labeling, evaluation, and model development platform.","https://scale.com","Data / AI"],
+      ["Snorkel AI","Programmatic data labeling and AI development platform.","https://snorkel.ai","Data / ML"],
+      ["Cleanlab","AI data curation and data quality platform.","https://cleanlab.ai","Data Quality"],
+      ["Arize AI","AI observability and evaluation platform for ML and generative AI.","https://arize.com","AI Observability"],
+      ["LangSmith","Development and observability platform for LLM applications.","https://smith.langchain.com","AI Development"],
+      ["Braintrust","AI evaluation and testing platform for LLM applications.","https://www.braintrust.dev","AI Evaluation"],
+      ["Weights & Biases Weave","LLM evaluation and tracing tools from Weights & Biases.","https://wandb.ai/site/weave","AI Evaluation"],
+      ["Humanloop","LLM evaluation, prompt management, and human feedback platform.","https://humanloop.com","AI Development"],
+      ["PromptLayer","Prompt management and observability platform for LLM applications.","https://promptlayer.com","AI Development"],
+      ["Helicone","Open-source observability and analytics for LLM APIs.","https://www.helicone.ai","AI Observability"],
+      ["Portkey","AI gateway, observability, guardrails, and model routing platform.","https://portkey.ai","AI Infrastructure"],
+      ["LiteLLM","Open-source library and proxy for accessing many LLM providers with one interface.","https://www.litellm.ai","AI Infrastructure"],
+      ["vLLM","High-performance inference engine for large language models.","https://vllm.ai","AI Infrastructure"],
+      ["Ollama","Local model runtime for running open language models on personal machines.","https://ollama.com","Local AI"],
+      ["LMDeploy","Toolkit for efficient LLM inference and deployment.","https://github.com/InternLM/lmdeploy","AI Infrastructure"],
+      ["SGLang","High-performance serving framework for language models and multimodal models.","https://github.com/sgl-project/sglang","AI Infrastructure"],
+      ["TensorRT-LLM","NVIDIA toolkit for optimized large-language-model inference.","https://github.com/NVIDIA/TensorRT-LLM","AI Infrastructure"],
+      ["PyTorch","Open-source machine learning framework widely used for AI research and development.","https://pytorch.org","AI Development"],
+      ["TensorFlow","Open-source machine learning framework for building and deploying AI models.","https://www.tensorflow.org","AI Development"],
+      ["JAX","High-performance numerical computing and machine-learning framework from Google.","https://jax.readthedocs.io","AI Development"],
+      ["Keras","High-level deep-learning framework for building and training neural networks.","https://keras.io","AI Development"],
+      ["scikit-learn","Open-source machine-learning toolkit for classical ML and data analysis.","https://scikit-learn.org","Machine Learning"],
+      ["Google Colab","Hosted notebook environment for Python, data science, and machine learning.","https://colab.research.google.com","Development / Education"],
+      ["Kaggle","Data science and machine-learning platform with datasets, notebooks, and competitions.","https://www.kaggle.com","Data Science"],
+      ["Papers with Code","Research discovery platform connecting machine-learning papers with code and benchmarks.","https://paperswithcode.com","Research"],
+      ["Hugging Face Spaces","Hosted demos and applications for AI and machine-learning models.","https://huggingface.co/spaces","AI Apps"],
+      ["Replicate","Run and integrate machine-learning models through an API.","https://replicate.com","AI API"],
+      ["Gradio","Python library for building web interfaces around machine-learning models.","https://www.gradio.app","AI Development"],
+      ["Streamlit","Framework for creating data and AI web apps quickly in Python.","https://streamlit.io","AI Development"],
+      ["Dify","Open-source platform for building LLM applications, workflows, agents, and RAG apps.","https://dify.ai","AI Development"],
+      ["Flowise","Visual builder for LLM workflows and AI agents.","https://flowiseai.com","AI Development"],
+      ["Langflow","Visual framework for building AI workflows and agent applications.","https://langflow.org","AI Development"],
+      ["Botpress","AI agent and chatbot development platform.","https://botpress.com","Chatbots / Agents"],
+      ["Voiceflow","Visual platform for designing conversational AI agents and voice experiences.","https://www.voiceflow.com","Agents / Chatbots"],
+      ["Botsonic","AI chatbot builder for business and customer support.","https://writesonic.com/botsonic","Chatbots"],
+      ["Chatbase","AI chatbot builder that can answer questions from business knowledge.","https://www.chatbase.co","Chatbots"],
+      ["CustomGPT.ai","Platform for creating AI assistants grounded in custom content.","https://customgpt.ai","Chatbots"],
+      ["DocsBot AI","AI chatbot trained on documents, websites, and knowledge bases.","https://docsbot.ai","Chatbots"],
+      ["SiteGPT","AI chatbot trained on website content for customer support.","https://sitegpt.ai","Chatbots"],
+      ["Botify","AI and automation tools for SEO and large websites.","https://www.botify.com","SEO"],
+      ["MarketMuse","AI-powered content strategy and SEO optimization.","https://www.marketmuse.com","SEO"],
+      ["Clearscope","AI-assisted SEO content optimization and keyword research.","https://www.clearscope.io","SEO"],
+      ["GrowthBar","AI SEO writing and content optimization platform.","https://www.growthbarseo.com","SEO"],
+      ["Koala AI","AI writing and SEO content generation platform.","https://koala.sh","SEO / Writing"],
+      ["Content at Scale","AI-assisted long-form SEO content generation.","https://contentatscale.ai","SEO / Writing"],
+      ["Article Forge","AI long-form content generation platform.","https://www.articleforge.com","Writing / SEO"],
+      ["Copysmith","AI content generation for ecommerce and marketing teams.","https://copysmith.ai","Marketing / Writing"],
+      ["Jounce","AI copywriting and marketing content generation.","https://www.jounce.ai","Marketing / Writing"],
+      ["Tugan.ai","AI generation for emails, newsletters, social posts, and marketing content.","https://tugan.ai","Marketing / Writing"],
+      ["Unbound","AI content and creative generation for small businesses and ecommerce.","https://www.unboundcontent.ai","Marketing / Design"],
+      ["Kittl AI","AI-assisted graphic design, text effects, and creative generation.","https://www.kittl.com","Design"],
+      ["Recraft","AI image and vector design generation for creative professionals.","https://www.recraft.ai","Design / Image"],
+      ["Vectorizer AI","AI vectorization and image-to-vector conversion.","https://vectorizer.ai","Design"],
+      ["Looka","AI logo and brand identity generation.","https://looka.com","Branding"],
+      ["Brandmark","AI logo and brand identity design.","https://brandmark.io","Branding"],
+      ["LogoAI","AI logo creation and brand identity tools.","https://www.logoai.com","Branding"],
+      ["Namecheap Logo Maker","AI-assisted logo creation and branding tools.","https://www.namecheap.com/logo-maker/","Branding"],
+      ["BrandCrowd","AI-assisted logo and branding design tools.","https://www.brandcrowd.com","Branding"],
+      ["Khroma","AI-assisted color palette generation personalized to user preferences.","https://www.khroma.co","Design / Color"],
+      ["Coolors","Color palette generation and design tools with AI-assisted workflows.","https://coolors.co","Design / Color"],
+      ["Fontjoy","AI-assisted font pairing and typography exploration.","https://fontjoy.com","Design / Typography"],
+      ["Remove.bg","AI background removal for photos.","https://www.remove.bg","Image Editing"],
+      ["Erase.bg","AI background removal and image cutout.","https://www.erase.bg","Image Editing"],
+      ["Removal.AI","AI image background removal and transparent cutouts.","https://removal.ai","Image Editing"],
+      ["Pixian","AI image background removal.","https://pixian.ai","Image Editing"],
+      ["Slazzer","AI background removal and image cutout.","https://www.slazzer.com","Image Editing"],
+      ["Cleanup.pictures","AI object removal and image cleanup.","https://cleanup.pictures","Image Editing"],
+      ["Designify","AI-powered product photo enhancement and design.","https://www.designify.com","Image Editing"],
+      ["Stylized","AI product photography and ecommerce image creation.","https://www.stylized.ai","Product Photography"],
+      ["Flair AI","AI design tool for branded product content.","https://flair.ai","Product Photography"],
+      ["Pebblely","AI product photography and background generation.","https://pebblely.com","Product Photography"],
+      ["Booth AI","AI product photography and visual generation.","https://booth.ai","Product Photography"],
+      ["ProductShots AI","AI-generated product photography and marketing visuals.","https://productshots.ai","Product Photography"],
+      ["Claid AI","AI image enhancement and ecommerce image optimization.","https://claid.ai","Image Enhancement"],
+      ["Upscayl","Open-source AI image upscaler.","https://upscayl.org","Image Upscaling"],
+      ["Topaz Video AI","AI video enhancement, frame interpolation, denoise, and upscaling.","https://www.topazlabs.com/topaz-video-ai","Video Enhancement"],
+      ["HitPaw","AI video, image, audio enhancement and editing tools.","https://www.hitpaw.com","Media Editing"],
+      ["Media.io","AI-powered online tools for video, audio, image, and media creation.","https://www.media.io","Media Editing"],
+      ["VEED AI","AI tools for online video editing, captions, translation, and generation.","https://www.veed.io","Video"],
+      ["FlexClip","Online video maker with AI generation and editing tools.","https://www.flexclip.com","Video"],
+      ["Steve AI","AI video generation from text and scripts.","https://www.steve.ai","Video Generation"],
+      ["Animaker AI","AI-assisted animation and video creation.","https://www.animaker.com","Animation"],
+      ["Kaiber","AI video and music visual generation platform.","https://kaiber.ai","Video / Music"],
+      ["Genmo","AI generative media platform for images and video.","https://www.genmo.ai","Video / Image"],
+      ["Haiper","AI video generation platform.","https://haiper.ai","Video Generation"],
+      ["PixVerse","AI video generation from text and images.","https://pixverse.ai","Video Generation"],
+      ["Viggle","AI character motion and video generation from images.","https://viggle.ai","Video / Animation"],
+      ["Hailuo AI","AI video generation and creative media tools.","https://hailuoai.video","Video Generation"],
+      ["Krea Video","AI-assisted real-time video generation and creative workflows.","https://www.krea.ai","Video"],
+      ["LTX Studio","AI filmmaking and story-to-video production workspace.","https://ltx.studio","Video / Filmmaking"],
+      ["StoryboardHero","AI-assisted storyboard and visual pre-production.","https://storyboardhero.ai","Filmmaking"],
+      ["Boords","Storyboard creation with AI-assisted workflows.","https://boords.com","Filmmaking"],
+      ["InstaNovel","AI-generated visual stories and novels.","https://instanovel.ai","Storytelling"],
+      ["Canva Magic Studio","AI-powered design and content creation suite inside Canva.","https://www.canva.com/magic-studio/","Design"],
+      ["Microsoft Designer","AI-assisted graphic design and image creation.","https://designer.microsoft.com","Design"],
+      ["Adobe Express","AI-assisted quick design, video, and social content creation.","https://www.adobe.com/express/","Design / Social"],
+      ["Visme AI","AI-assisted presentations, infographics, and visual content.","https://www.visme.co","Design / Presentations"],
+      ["Piktochart AI","AI-generated infographics and visual communication assets.","https://piktochart.com","Infographics"],
+      ["Venngage AI","AI-assisted infographic and visual content creation.","https://venngage.com","Infographics"],
+      ["Beautiful.ai","AI presentation design and automated layouts.","https://www.beautiful.ai","Presentations"],
+      ["SlidesAI","AI presentation generation for Google Slides and PowerPoint workflows.","https://www.slidesai.io","Presentations"],
+      ["Plus AI","AI presentation creation and editing for PowerPoint and Google Slides.","https://www.plusdocs.com/plus-ai","Presentations"],
+      ["Decktopus","AI-powered presentation creation and delivery tools.","https://www.decktopus.com","Presentations"],
+      ["Pitch AI","AI-assisted presentations and collaborative pitch decks.","https://pitch.com","Presentations"],
+      ["Presentations.ai","AI presentation creation from prompts and content.","https://www.presentations.ai","Presentations"],
+      ["Prezi AI","AI-assisted visual presentation creation.","https://prezi.com","Presentations"],
+      ["Slidesgo AI","AI presentation generation and editable slide templates.","https://slidesgo.com/ai/presentation-maker","Presentations"],
+      ["ChatPDF","AI document assistant for asking questions about PDFs.","https://www.chatpdf.com","Documents / Research"],
+      ["AskYourPDF","AI document chat and question answering over PDFs.","https://askyourpdf.com","Documents"],
+      ["Humata","AI assistant for analyzing and asking questions about files and documents.","https://www.humata.ai","Documents"],
+      ["PDF.ai","AI chat and analysis for PDF documents.","https://pdf.ai","Documents"],
+      ["Adobe Acrobat AI Assistant","AI-powered PDF summarization, questions, and document assistance.","https://www.adobe.com/acrobat/generative-ai-pdf.html","Documents"],
+      ["Documind","AI document question answering and extraction.","https://documind.chat","Documents"],
+      ["Unstructured","Tools for extracting and transforming unstructured documents for AI pipelines.","https://unstructured.io","Documents / Data"],
+      ["LlamaParse","Document parsing service for RAG and AI applications.","https://www.llamaindex.ai/llamaparse","Documents / RAG"],
+      ["Mathpix","AI OCR and document conversion for math, science, and technical content.","https://mathpix.com","OCR / Documents"],
+      ["Nanonets","AI document processing and intelligent document extraction.","https://nanonets.com","Documents / Automation"],
+      ["Rossum","AI-powered document processing and data extraction.","https://rossum.ai","Documents / Automation"],
+      ["Docugami","AI document engineering and enterprise document workflows.","https://www.docugami.com","Documents"],
+      ["Hyperscience","AI document processing and intelligent automation.","https://www.hyperscience.com","Documents / Automation"],
+      ["Amazon Textract","OCR and document data extraction service from AWS.","https://aws.amazon.com/textract/","OCR"],
+      ["Google Document AI","AI document processing and structured data extraction.","https://cloud.google.com/document-ai","OCR / Documents"],
+      ["Azure AI Document Intelligence","Document OCR and structured extraction services.","https://azure.microsoft.com/products/ai-services/ai-document-intelligence","OCR / Documents"],
+      ["PaddleOCR","Open-source OCR toolkit for text recognition and document processing.","https://github.com/PaddlePaddle/PaddleOCR","OCR"],
+      ["Tesseract OCR","Open-source optical character recognition engine.","https://github.com/tesseract-ocr/tesseract","OCR"],
+      ["GitBook AI","AI assistance for technical documentation and knowledge bases.","https://www.gitbook.com","Documentation"],
+      ["Mintlify","AI-powered developer documentation platform.","https://mintlify.com","Documentation"],
+      ["Swimm","AI-assisted code documentation and knowledge management.","https://swimm.io","Documentation / Coding"],
+      ["ReadMe","Developer documentation platform with AI assistance.","https://readme.com","Documentation"],
+      ["Stenography","AI-generated code documentation and explanations.","https://stenography.dev","Coding / Documentation"],
+      ["WhatTheDiff","AI code review assistant for explaining pull-request changes.","https://whatthediff.ai","Coding"],
+      ["Snyk AI","AI-assisted developer security and code vulnerability workflows.","https://snyk.io","Security / Coding"],
+      ["GitGuardian","AI-assisted secrets detection and developer security.","https://www.gitguardian.com","Security"],
+      ["CrowdStrike Charlotte AI","AI-powered cybersecurity assistant and security operations capabilities.","https://www.crowdstrike.com","Cybersecurity"],
+      ["Microsoft Security Copilot","AI assistant for cybersecurity investigation and response.","https://www.microsoft.com/security/business/ai-machine-learning/microsoft-security-copilot","Cybersecurity"],
+      ["Google Security Operations","AI-assisted security analytics and operations platform.","https://cloud.google.com/security/products/security-operations","Cybersecurity"],
+      ["Darktrace","AI-powered cybersecurity detection and response platform.","https://darktrace.com","Cybersecurity"],
+      ["Abnormal Security","AI-powered email security and threat detection.","https://abnormalsecurity.com","Cybersecurity"],
+      ["Huntress","Managed cybersecurity platform with AI-assisted detection and response.","https://www.huntress.com","Cybersecurity"],
+      ["Securiti AI","AI data security, privacy, and governance platform.","https://securiti.ai","Security / Privacy"],
+      ["OneTrust AI","AI-assisted privacy, governance, risk, and compliance tools.","https://www.onetrust.com","Privacy / Compliance"],
+      ["Vanta","AI-assisted security compliance and trust management.","https://www.vanta.com","Compliance"],
+      ["Drata","Automated security compliance and audit readiness platform.","https://drata.com","Compliance"],
+      ["Secureframe","Automated security compliance and certification platform.","https://secureframe.com","Compliance"],
+      ["Census AI","AI-assisted data activation and analytics workflows.","https://www.getcensus.com","Data"],
+      ["dbt","Analytics engineering and data transformation platform.","https://www.getdbt.com","Data"],
+      ["Snowflake Cortex AI","AI and ML capabilities embedded in Snowflake data platform.","https://www.snowflake.com/en/product/features/cortex/","Data / AI"],
+      ["Databricks Mosaic AI","AI development and data intelligence platform.","https://www.databricks.com/product/machine-learning/mosaic-ai","Data / AI"],
+      ["Hex","Collaborative data workspace with AI-assisted analysis.","https://hex.tech","Data / Analytics"],
+      ["Metabase","Business intelligence and analytics platform with AI assistance.","https://www.metabase.com","Data / BI"],
+      ["ThoughtSpot","AI-powered analytics and natural-language data exploration.","https://www.thoughtspot.com","Data / BI"],
+      ["Domo","Business intelligence and data platform with AI capabilities.","https://www.domo.com","Data / BI"],
+      ["Amplitude AI","AI-assisted product analytics and behavioral insights.","https://amplitude.com","Analytics"],
+      ["PostHog","Product analytics platform with AI-assisted analysis and experimentation.","https://posthog.com","Analytics"],
+      ["Mixpanel","Product analytics platform with AI-assisted insights and data exploration.","https://mixpanel.com","Analytics"],
+      ["Heap","Digital insights and product analytics with AI capabilities.","https://www.heap.io","Analytics"],
+      ["Pendo AI","AI-powered product analytics and user guidance.","https://www.pendo.io","Analytics / Product"],
+      ["FullStory","Digital experience analytics and session insights with AI capabilities.","https://www.fullstory.com","Analytics"],
+      ["Hotjar AI","AI-assisted website behavior analysis and insights.","https://www.hotjar.com","Analytics"],
+      ["Clarity","Microsoft website analytics and session recording with AI-assisted insights.","https://clarity.microsoft.com","Analytics"],
+      ["Similarweb","Digital market intelligence and website analytics with AI features.","https://www.similarweb.com","Analytics / Marketing"],
+      ["Crayon","AI and competitive intelligence for market monitoring.","https://www.crayon.co","Competitive Intelligence"],
+      ["Kompyte","Competitive intelligence and market monitoring platform.","https://www.kompyte.com","Competitive Intelligence"],
+      ["G2 AI","AI-assisted software discovery and recommendations through G2.","https://www.g2.com","Software Discovery"],
+      ["Product Hunt","Product discovery platform with AI product ecosystem listings.","https://www.producthunt.com","Discovery"],
+      ["There’s An AI For That","AI tool discovery directory organized by use case.","https://theresanaiforthat.com","AI Directory"],
+      ["Futurepedia","AI tool discovery and directory platform.","https://www.futurepedia.io","AI Directory"],
+      ["Toolify","AI tool directory and discovery platform.","https://www.toolify.ai","AI Directory"],
+      ["TopAI.tools","AI tool directory organized by categories and use cases.","https://topai.tools","AI Directory"],
+      ["AIxploria","AI tools and AI news discovery directory.","https://www.aixploria.com","AI Directory"],
+      ["AI Tool Directory","Directory for discovering AI tools across categories.","https://aitoolsdirectory.com","AI Directory"],
+      ["AI Dictionary Finder","AI tools discovery and search platform.","https://aitools.fyi","AI Directory"],
+      ["AI Tool Hunt","AI tool discovery and curated recommendations.","https://aitoolhunt.com","AI Directory"],
+      ["ToolPilot","AI tool discovery, comparisons, and category browsing.","https://www.toolpilot.ai","AI Directory"],
+      ["AI Parabellum","AI tools and resources discovery platform.","https://aiparabellum.com","AI Directory"],
+      ["AI Scout","AI tool search and discovery.","https://aiscout.net","AI Directory"],
+      ["FutureTools","AI tool discovery and news from Matt Wolfe.","https://www.futuretools.io","AI Directory"],
+      ["There's An AI For That","Search engine for finding AI tools by task.","https://theresanaiforthat.com","AI Directory"],
+      ["AllAIWebsite","AI tools directory organized into many categories.","https://allaiwebsite.com","AI Directory"],
+      ["AIToolsHaven","AI tool directory organized by functional categories and use cases.","https://aitoolshaven.com","AI Directory"],
+      ["AIToolSearch","AI tools directory with categories and subcategories.","https://www.aitoolsearch.io","AI Directory"],
+      ["ToolsML","Curated AI tools directory with search by name, category, and use case.","https://toolsml.com","AI Directory"],
+      ["Best of AI","Open-source handpicked AI tools directory.","https://bestofai.io","AI Directory"],
+      ["AIFOXX","Open-source directory of AI tools with structured metadata.","https://aifoxx.com","AI Directory"],
+      ["AI Dictionary Wiki","AI software directory for finding tools by task.","https://aitoolswiki.com","AI Directory"],
+      ["AI Tool Recap","AI tool directory grouped by creator, business, technical, and research use cases.","https://www.aitoolrecap.com","AI Directory"],
+      ["Best AI Dictionary","Curated AI software directory.","https://bestaitools.id","AI Directory"]
+    ];
+
+    function normalizeAITool(entry) {
+      if (!entry || typeof entry !== "object") return null;
+      const name = entry.name || entry.title || entry.tool || entry.product || entry.label;
+      const purpose = entry.description || entry.desc || entry.summary || entry.purpose || entry.title || "AI tool for a specialized use case.";
+      const website = entry.website || entry.url || entry.link || entry.homepage || entry.website_url;
+      let cats = entry.category || entry.categories || entry.tags || entry.use_cases || [];
+      if (!Array.isArray(cats)) cats = [cats];
+      cats = cats.filter(Boolean).map(String);
+      if (!name || !website || !/^https?:\/\//i.test(String(website))) return null;
+      return { name: String(name).trim(), purpose: String(purpose).replace(/\\s+/g," ").trim(), website: String(website), categories: cats };
+    }
+
+    function parseAIJson(payload) {
+      const raw = Array.isArray(payload) ? payload : (payload.tools || payload.data || payload.items || payload.entries || payload.results || []);
+      return Array.isArray(raw) ? raw.map(normalizeAITool).filter(Boolean) : [];
+    }
+
+    function parseAIMarkdown(markdown) {
+      const out = [];
+      let category = "AI Dictionary";
+      const lines = String(markdown).split(/\r?\n/);
+      for (const line of lines) {
+        const heading = line.match(/^#{2,4}\s+(.+?)\s*$/);
+        if (heading) { category = heading[1].replace(/[*_]/g, "").trim(); continue; }
+        const matches = [...line.matchAll(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g)];
+        if (!matches.length) continue;
+        for (const m of matches) {
+          const name = m[1].trim();
+          const website = m[2].trim();
+          if (!name || name.length > 100) continue;
+          const before = line.slice(m.index + m[0].length);
+          const parts = before.split("|").map(x=>x.trim()).filter(Boolean);
+          const purpose = (parts[0] || `${category} AI tool`).replace(/[*_`]/g, "").trim();
+          out.push({name, purpose: purpose || `${category} AI tool`, website, categories:[category]});
+        }
+      }
+      return out;
+    }
+
+    function dedupeAITools(list) {
+      const seen = new Set();
+      const out = [];
+      for (const item of list) {
+        const key = `${item.name.toLowerCase()}|${item.website.toLowerCase().replace(/\/$/,"")}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(item);
+      }
+      return out;
+    }
+
+    async function loadAITools() {
+      if (aiDictionaryLoaded) return;
+      if (aiDictionaryLoadingPromise) return aiDictionaryLoadingPromise;
+      aiDictionaryLoadingPromise = (async () => {
+        let remote = [];
+        // Current open directory: Best of AI publishes a public /index.json with 1000+ tools.
+        try {
+          const r = await fetch("https://bestofai.io/index.json", { cache: "no-store" });
+          if (r.ok) remote = parseAIJson(await r.json());
+        } catch (_) {}
+
+        // Fallback: the public 1000+ AI collection README can be parsed client-side.
+        if (remote.length < 500) {
+          try {
+            const r = await fetch("https://raw.githubusercontent.com/topviewai/1000-AI-collection-tools/refs/heads/main/README.md", { cache: "no-store" });
+            if (r.ok) remote = remote.concat(parseAIMarkdown(await r.text()));
+          } catch (_) {}
+        }
+
+        aiDictionaryData = dedupeAITools(remote.concat(AI_FALLBACK_TOOLS.map(([name,purpose,website,cat]) => ({name,purpose,website,categories:[cat]}))));
+        aiDictionaryLoaded = true;
+        populateAIToolCategories();
+        renderAITools();
+      })();
+      return aiDictionaryLoadingPromise;
+    }
+
+    function populateAIToolCategories() {
+      const cats = [...new Set(aiDictionaryData.flatMap(t => t.categories || []))].filter(Boolean).sort((a,b)=>a.localeCompare(b));
+      const all = ["ALL", ...cats];
+      aiDictionaryCategoryChips.innerHTML = all.map(cat => {
+        const label = cat === "ALL" ? `✨ All AI Dictionary (${aiDictionaryData.length.toLocaleString()})` : cat;
+        const active = cat === aiSelectedCategory ? "active" : "";
+        return `<button type="button" class="pill-chip ${active}" data-ai-cat="${escapeHtml(cat)}">${escapeHtml(label)}</button>`;
+      }).join("");
+    }
+
+    let aiFilteredTools = [];
+    let aiRenderedCount = 0;
+    const AI_BATCH_SIZE = 120;
+
+    function shortAIToolPurpose(text, max = 92) {
+      const clean = String(text || "").replace(/\s+/g, " ").trim();
+      if (clean.length <= max) return clean;
+      const cut = clean.slice(0, max).replace(/\s+\S*$/, "").trim();
+      return (cut || clean.slice(0, max)).replace(/[.,;:!?-]+$/, "") + "…";
+    }
+
+    function aiToolMarkup(t, i) {
+      const shortPurpose = shortAIToolPurpose(t.purpose);
+      return `<div class="ai-tool-item" data-ai-index="${i}">
+        <div class="ai-tool-row">
+          <button class="ai-tool-link" type="button" data-ai-url="${escapeHtml(t.website)}" title="Open ${escapeHtml(t.name)}">${escapeHtml(t.name)}</button>
+          <button class="ai-tool-expand" type="button" aria-label="Show purpose for ${escapeHtml(t.name)}" title="Show purpose">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+        <div class="ai-tool-purpose"><div>${escapeHtml(shortPurpose)}${t.categories?.length ? `<br><span style="opacity:.72">${escapeHtml(t.categories.slice(0,3).join(" · "))}</span>` : ""}</div></div>
+      </div>`;
+    }
+
+    function appendAIToolBatch() {
+      if (aiRenderedCount >= aiFilteredTools.length) return;
+      const end = Math.min(aiRenderedCount + AI_BATCH_SIZE, aiFilteredTools.length);
+      let html = "";
+      for (let i = aiRenderedCount; i < end; i++) html += aiToolMarkup(aiFilteredTools[i], i);
+      aiDictionaryGrid.insertAdjacentHTML("beforeend", html);
+      aiRenderedCount = end;
+    }
+
+    function renderAITools() {
+      const q = aiDictionarySearch.value.toLowerCase().trim();
+      const cat = aiSelectedCategory;
+      aiFilteredTools = aiDictionaryData.filter(t => {
+        const text = `${t.name} ${t.purpose} ${(t.categories||[]).join(" ")}`.toLowerCase();
+        const matchQ = !q || text.includes(q);
+        const matchCat = cat === "ALL" || (t.categories||[]).includes(cat);
+        return matchQ && matchCat;
+      });
+      aiDictionaryCount.textContent = `${aiFilteredTools.length.toLocaleString()} AI tools`;
+      aiRenderedCount = 0;
+      aiDictionaryList.scrollTop = 0;
+      aiDictionaryGrid.innerHTML = "";
+      if (!aiFilteredTools.length) {
+        aiDictionaryGrid.innerHTML = '<div class="ai-dictionary-empty"><strong>No AI tools found.</strong><br>Try another name, purpose, category, or use case.</div>';
+        return;
+      }
+      appendAIToolBatch();
+    }
+
+    aiDictionaryGrid.addEventListener("click", (e) => {
+      const link = e.target.closest(".ai-tool-link");
+      if (link) {
+        const url = link.getAttribute("data-ai-url");
+        if (url) window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+      const expand = e.target.closest(".ai-tool-expand");
+      if (expand) {
+        const item = expand.closest(".ai-tool-item");
+        if (!item) return;
+        item.classList.toggle("expanded");
+        expand.classList.toggle("open");
+      }
+    });
+
+    aiDictionaryList.addEventListener("scroll", () => {
+      if (aiRenderedCount < aiFilteredTools.length && aiDictionaryList.scrollTop + aiDictionaryList.clientHeight >= aiDictionaryList.scrollHeight - 700) {
+        appendAIToolBatch();
+      }
+    }, { passive: true });
+
+    aiDictionarySearch.addEventListener("input", renderAITools);
+    aiDictionaryCategoryChips.addEventListener("click", (e) => {
+      const chip = e.target.closest("[data-ai-cat]");
+      if (!chip) return;
+      aiSelectedCategory = chip.dataset.aiCat || "ALL";
+      aiDictionaryCategoryChips.querySelectorAll(".pill-chip").forEach(btn => btn.classList.toggle("active", btn === chip));
+      renderAITools();
+    });
+
+    function scrollAICategories(amount) {
+      aiDictionaryCategoryChips.scrollBy({ left: amount, behavior: "smooth" });
+    }
+    aiDictionaryCategoryLeft.addEventListener("click", () => scrollAICategories(-Math.max(260, aiDictionaryCategoryChips.clientWidth * .75)));
+    aiDictionaryCategoryRight.addEventListener("click", () => scrollAICategories(Math.max(260, aiDictionaryCategoryChips.clientWidth * .75)));
+
+    // Mouse-wheel scrolling is horizontal ONLY while the pointer is over the AI category strip.
+    aiDictionaryCategoryChips.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        aiDictionaryCategoryChips.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+
+    // Shift + wheel also works naturally, without affecting the rest of the AI screen.
+    aiDictionaryCategoryChips.addEventListener("wheel", (e) => {
+      if (e.shiftKey && Math.abs(e.deltaX) > 0) {
+        e.preventDefault();
+        aiDictionaryCategoryChips.scrollLeft += e.deltaX;
+      }
+    }, { passive: false });
+
+    function closeAITools() {
+      aiDictionaryModal.classList.remove("active");
+      document.body.classList.remove("ai-dictionary-open");
+    }
+
+    aiDictionaryTrigger.addEventListener("click", () => {
+      window.location.href = "https://slakshaydp.github.io/AI-Dictionary/";
+    });
+    aiDictionaryModal.querySelector(".modal-close")?.addEventListener("click", closeAITools);
+    aiDictionaryModal.addEventListener("click", e => {
+      if (e.target === aiDictionaryModal) closeAITools();
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && aiDictionaryModal.classList.contains("active")) closeAITools();
+    });
 
     setupModal(aboutSiteMenuBtn, aboutModal, resetSnakeView);
     setupModal(contactUsMenuBtn, contactModal, resetSpaceView);
@@ -4532,11 +5640,21 @@
        ARCADE ENGINES (SNAKE, HIGH-SPEED SPACE SHOOTER, TETRIS)
        ========================================================================== */
     let activeGame = null;
+    let gameRestartTimeout = null;
+
+    function cancelGameRestart() {
+      if (gameRestartTimeout) {
+        clearTimeout(gameRestartTimeout);
+        gameRestartTimeout = null;
+      }
+    }
 
     function stopAllArcadeGames() {
-      if (snakeInterval) clearInterval(snakeInterval);
-      if (spaceAnimationId) cancelAnimationFrame(spaceAnimationId);
-      if (tetrisInterval) clearInterval(tetrisInterval);
+      arcadeSuspended = false;
+      cancelGameRestart();
+      if (snakeInterval) { clearInterval(snakeInterval); snakeInterval = null; }
+      if (spaceAnimationId) { cancelAnimationFrame(spaceAnimationId); spaceAnimationId = null; }
+      if (tetrisInterval) { clearInterval(tetrisInterval); tetrisInterval = null; }
       activeGame = null;
     }
 
@@ -4572,6 +5690,7 @@
 
     let snake = [], snakeFood = {}, snakeDx = 15, snakeDy = 0, snakeScore = 0;
     function startSnakeGame() {
+      arcadeSuspended = false;
       stopAllArcadeGames();
       activeGame = "snake";
       snake = [{x: 150, y: 150}, {x: 135, y: 150}, {x: 120, y: 150}];
@@ -4596,8 +5715,14 @@
       if (head.x < 0 || head.x >= snakeCanvas.width || head.y < 0 || head.y >= snakeCanvas.height ||
           snake.some(segment => segment.x === head.x && segment.y === head.y)) {
         clearInterval(snakeInterval);
+        snakeInterval = null;
+        activeGame = null;
         showToast(`Game Over! Score: ${snakeScore}`);
-        setTimeout(startSnakeGame, 1400);
+        cancelGameRestart();
+        gameRestartTimeout = setTimeout(() => {
+          gameRestartTimeout = null;
+          if (snakeGameView.style.display !== "none" && aboutModal.classList.contains("active")) startSnakeGame();
+        }, 1400);
         return;
       }
 
@@ -4660,6 +5785,7 @@
     let bullets = [], enemies = [], spaceScore = 0, spaceSpawnTimer = 0;
 
     function startSpaceGame() {
+      arcadeSuspended = false;
       stopAllArcadeGames();
       activeGame = "space";
       ship.x = 140; ship.y = 260;
@@ -4692,8 +5818,14 @@
 
         if (e.x < ship.x + ship.w && e.x + e.w > ship.x && e.y < ship.y + ship.h && e.y + e.h > ship.y) {
           cancelAnimationFrame(spaceAnimationId);
+          spaceAnimationId = null;
+          activeGame = null;
           showToast(`Game Over! Score: ${spaceScore}`);
-          setTimeout(startSpaceGame, 1400);
+          cancelGameRestart();
+          gameRestartTimeout = setTimeout(() => {
+            gameRestartTimeout = null;
+            if (spaceGameView.style.display !== "none" && contactModal.classList.contains("active")) startSpaceGame();
+          }, 1400);
           return;
         }
 
@@ -4780,6 +5912,7 @@
     const COLORS = ["#38bdf8", "#fbbf24", "#a855f7", "#f97316", "#3b82f6", "#22c55e", "#ef4444"];
 
     function startTetrisGame() {
+      arcadeSuspended = false;
       stopAllArcadeGames();
       activeGame = "tetris";
       board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
@@ -4800,8 +5933,14 @@
       };
       if (isTetrisCollision(currentPiece.x, currentPiece.y, currentPiece.shape)) {
         clearInterval(tetrisInterval);
+        tetrisInterval = null;
+        activeGame = null;
         showToast(`Game Over! Cleared: ${tetrisScore} lines`);
-        setTimeout(startTetrisGame, 1400);
+        cancelGameRestart();
+        gameRestartTimeout = setTimeout(() => {
+          gameRestartTimeout = null;
+          if (tetrisGameView.style.display !== "none" && coffeeModal.classList.contains("active")) startTetrisGame();
+        }, 1400);
       }
     }
 
@@ -4963,264 +6102,9 @@
     // --- Exclusively Scoped Key Listener ---
     window.addEventListener("keydown", (e) => {
       if (!activeGame) return;
-
       const k = e.key.toLowerCase();
-      const gameKeys = ["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d", "enter", " ", "space"
-      // 68. IMAGE EDITING & TRANSFORMATION (1742-1992)
-      [1742, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/image-edit [image , Instruction]", "Edits an uploaded image according to the requested instructions.", "/image-edit [image , remove the background and improve lighting]"],
-      [1743, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-enhance [image]", "Enhances overall image quality while preserving the original appearance.", "/photo-enhance [image]"],
-      [1744, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/image-enhance [image , Instruction]", "Improves an uploaded image according to specific enhancement instructions.", "/image-enhance [image , make it sharper and clearer]"],
-      [1745, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/image-upscale [image]", "Upscales an image while attempting to preserve important details.", "/image-upscale [image]"],
-      [1746, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/image-restore [image]", "Restores an old, damaged, faded, or degraded image.", "/image-restore [image]"],
-      [1747, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-restore [image]", "Repairs an old photograph while preserving its original character.", "/photo-restore [image]"],
-      [1748, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-cleanup [image , Instruction]", "Removes unwanted visual distractions from a photograph.", "/photo-cleanup [image , remove the scratches and dust]"],
-      [1749, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/image-repair [image , Instruction]", "Repairs visible defects or damaged areas in an image.", "/image-repair [image , repair the damaged corner]"],
-      [1750, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-sharpen [image]", "Improves apparent sharpness and definition.", "/photo-sharpen [image]"],
-      [1751, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-denoise [image]", "Reduces digital noise while preserving important details.", "/photo-denoise [image]"],
-      [1752, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-deblur [image]", "Attempts to reduce blur and improve image clarity.", "/photo-deblur [image]"],
-      [1753, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/image-color-correct [image]", "Corrects color balance and improves natural-looking tones.", "/image-color-correct [image]"],
-      [1754, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-exposure [image , Instruction]", "Corrects exposure while preserving natural details.", "/photo-exposure [image , brighten the dark areas]"],
-      [1755, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-white-balance [image]", "Corrects white balance and color temperature.", "/photo-white-balance [image]"],
-      [1756, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-contrast [image , Instruction]", "Adjusts contrast according to the requested look.", "/photo-contrast [image , increase contrast slightly]"],
-      [1757, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-saturation [image , Instruction]", "Adjusts color saturation while maintaining a natural appearance.", "/photo-saturation [image , make colors more vibrant]"],
-      [1758, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-tone [image , Instruction]", "Changes the overall tonal character of the image.", "/photo-tone [image , create a warm cinematic tone]"],
-      [1759, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-lighting [image , Instruction]", "Modifies the lighting appearance of an uploaded photograph.", "/photo-lighting [image , add soft studio lighting]"],
-      [1760, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-shadow [image , Instruction]", "Adjusts or modifies shadows in the image.", "/photo-shadow [image , soften harsh shadows]"],
-      [1761, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photo-highlight [image , Instruction]", "Adjusts highlights while preserving image detail.", "/photo-highlight [image , recover bright highlights]"],
-      [1762, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/remove-background [image]", "Removes the background while preserving the main subject.", "/remove-background [image]"],
-      [1763, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/transparent-background [image]", "Removes the background and creates a transparent result.", "/transparent-background [image]"],
-      [1764, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-replace [image , Instruction]", "Replaces the existing background with a specified environment.", "/background-replace [image , replace background with a modern office]"],
-      [1765, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-change [image , Instruction]", "Changes the background according to the requested setting.", "/background-change [image , beach sunset]"],
-      [1766, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-blur [image , Instruction]", "Blurs or modifies the background while keeping the subject clear.", "/background-blur [image , strong portrait blur]"],
-      [1767, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-clean [image]", "Cleans unwanted objects and distractions from the background.", "/background-clean [image]"],
-      [1768, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-remove-object [image , Instruction]", "Removes specified background objects.", "/background-remove-object [image , remove the people behind me]"],
-      [1769, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-expand [image , Instruction]", "Extends the image beyond its original boundaries.", "/background-expand [image , extend the background naturally]"],
-      [1770, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-extend [image , Instruction]", "Expands the canvas while generating a consistent continuation.", "/background-extend [image , extend to 16:9]"],
-      [1771, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-recreate [image , Instruction]", "Recreates or replaces the background while preserving the subject.", "/background-recreate [image , luxury studio background]"],
-      [1772, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-replace-product [image , Instruction]", "Replaces a product's background with a commercial setting.", "/background-replace-product [image , clean white studio]"],
-      [1773, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BACKGROUND EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/background-remove-product [image]", "Removes the background from a product photograph.", "/background-remove-product [image]"],
-      [1774, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-remove [image , Instruction]", "Removes a specified object and reconstructs the surrounding area.", "/object-remove [image , remove the chair]"],
-      [1775, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/person-remove [image , Instruction]", "Removes specified people from a photograph.", "/person-remove [image , remove everyone standing behind the subject]"],
-      [1776, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/person-add [image , Instruction]", "Adds a requested person or visual element while matching the scene.", "/person-add [image , add a person standing beside him]"],
-      [1777, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-add [image , Instruction]", "Adds a specified object into an existing image.", "/object-add [image , add a laptop on the table]"],
-      [1778, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-replace [image , Instruction]", "Replaces a specified object with another object.", "/object-replace [image , replace the phone with a tablet]"],
-      [1779, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-change [image , Instruction]", "Changes a selected object according to the instruction.", "/object-change [image , change the chair to black]"],
-      [1780, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-color [image , Instruction]", "Changes the color of a selected object.", "/object-color [image , make the car metallic blue]"],
-      [1781, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-material [image , Instruction]", "Changes the apparent material or finish of an object.", "/object-material [image , make the surface glossy]"],
-      [1782, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-size [image , Instruction]", "Adjusts the apparent size of a specified object.", "/object-size [image , make the logo smaller]"],
-      [1783, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SUBJECT EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/object-position [image , Instruction]", "Repositions an object while maintaining scene consistency.", "/object-position [image , move the table to the left]"],
-      [1784, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-enhance [image]", "Enhances a portrait while preserving the person's identity and natural appearance.", "/portrait-enhance [image]"],
-      [1785, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-retouch [image , Instruction]", "Performs controlled portrait retouching.", "/portrait-retouch [image , remove minor blemishes]"],
-      [1786, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-lighting [image , Instruction]", "Creates or modifies portrait lighting.", "/portrait-lighting [image , professional studio lighting]"],
-      [1787, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-background [image , Instruction]", "Changes the portrait background while preserving the subject.", "/portrait-background [image , professional gray studio]"],
-      [1788, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-colorgrade [image , Instruction]", "Applies a specified color grade to a portrait.", "/portrait-colorgrade [image , cinematic warm tone]"],
-      [1789, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-clothing [image , Instruction]", "Changes clothing while preserving the person's pose and identity.", "/portrait-clothing [image , change shirt to a formal suit]"],
-      [1790, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-outfit [image , Instruction]", "Replaces or modifies an outfit according to instructions.", "/portrait-outfit [image , business formal outfit]"],
-      [1791, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-hair [image , Instruction]", "Changes hairstyle or hair appearance.", "/portrait-hair [image , short professional hairstyle]"],
-      [1792, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-glasses [image , Instruction]", "Adds, removes, or changes glasses.", "/portrait-glasses [image , add black rectangular glasses]"],
-      [1793, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-accessory [image , Instruction]", "Adds or modifies specified accessories.", "/portrait-accessory [image , add a watch]"],
-      [1794, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-expression [image , Instruction]", "Modifies facial expression while attempting to preserve identity.", "/portrait-expression [image , natural smile]"],
-      [1795, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-age [image , Instruction]", "Creates an age-transformed version of the subject.", "/portrait-age [image , make the subject look older]"],
-      [1796, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-professional [image]", "Converts a portrait into a professional profile photograph.", "/portrait-professional [image]"],
-      [1797, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-linkedin [image]", "Creates a professional LinkedIn-style portrait.", "/portrait-linkedin [image]"],
-      [1798, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-passport [image]", "Prepares a clean passport-style portrait while preserving identity.", "/portrait-passport [image]"],
-      [1799, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PORTRAIT EDITING", "PHOTOGRAPHY", "IMAGE INPUT"], "/portrait-id-photo [image]", "Creates an ID-photo-style portrait with a clean background.", "/portrait-id-photo [image]"],
-      [1800, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/clothing-change [image , Instruction]", "Changes the subject's clothing according to the instruction.", "/clothing-change [image , change to a white formal shirt]"],
-      [1801, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/shirt-change [image , Instruction]", "Replaces the shirt or top.", "/shirt-change [image , replace with a black polo shirt]"],
-      [1802, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/suit-change [image , Instruction]", "Dresses the subject in a specified suit style.", "/suit-change [image , navy business suit]"],
-      [1803, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/uniform-change [image , Instruction]", "Changes clothing into a specified uniform.", "/uniform-change [image , medical student uniform]"],
-      [1804, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/fashion-edit [image , Instruction]", "Applies a specified fashion transformation.", "/fashion-edit [image , luxury streetwear]"],
-      [1805, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/outfit-color [image , Instruction]", "Changes clothing colors.", "/outfit-color [image , change outfit to dark green]"],
-      [1806, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/outfit-style [image , Instruction]", "Changes the overall outfit style.", "/outfit-style [image , smart casual]"],
-      [1807, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/clothing-clean [image]", "Improves the appearance and presentation of clothing.", "/clothing-clean [image]"],
-      [1808, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "CLOTHING & FASHION", "PHOTOGRAPHY", "IMAGE INPUT"], "/clothing-detail [image , Instruction]", "Enhances or modifies clothing details.", "/clothing-detail [image , add subtle fabric texture]"],
-      [1809, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-edit [image , Instruction]", "Edits a product image according to commercial requirements.", "/product-edit [image , make the product background white]"],
-      [1810, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-background [image , Instruction]", "Creates a professional background for a product.", "/product-background [image , luxury studio]"],
-      [1811, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-cleanup [image]", "Removes visual distractions from a product photograph.", "/product-cleanup [image]"],
-      [1812, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-shadow [image , Instruction]", "Adds or modifies realistic product shadows.", "/product-shadow [image , soft studio shadow]"],
-      [1813, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-reflection [image , Instruction]", "Adds a controlled commercial reflection.", "/product-reflection [image , subtle reflection beneath product]"],
-      [1814, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-lighting [image , Instruction]", "Creates professional product lighting.", "/product-lighting [image , premium studio lighting]"],
-      [1815, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-packshot [image]", "Creates a clean commercial packshot presentation.", "/product-packshot [image]"],
-      [1816, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-ad [image , Instruction]", "Turns a product image into an advertising composition.", "/product-ad [image , luxury perfume advertisement]"],
-      [1817, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-banner [image , Instruction]", "Creates a promotional banner around the uploaded product.", "/product-banner [image , create a website sale banner]"],
-      [1818, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-poster [image , Instruction]", "Creates a promotional poster using the uploaded product.", "/product-poster [image , premium launch poster]"],
-      [1819, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-social [image , Instruction]", "Creates a social-media-ready product composition.", "/product-social [image , Instagram product advertisement]"],
-      [1820, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-catalog [image]", "Creates a clean catalog-style product image.", "/product-catalog [image]"],
-      [1821, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-marketplace [image]", "Creates a marketplace-ready product presentation.", "/product-marketplace [image]"],
-      [1822, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-hero [image , Instruction]", "Creates a high-impact hero image for a product.", "/product-hero [image , dramatic premium lighting]"],
-      [1823, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "PRODUCT & BRAND IMAGES", "BRANDING", "IMAGE INPUT"], "/product-lifestyle [image , Instruction]", "Places a product into a realistic lifestyle environment.", "/product-lifestyle [image , place it on a modern office desk]"],
-      [1824, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-clean", "Cleans and improves a logo while preserving its original design.", "/logo-clean [logo]"],
-      [1825, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-enhance", "Enhances logo clarity and edges.", "/logo-enhance [logo]"],
-      [1826, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-transparent", "Creates a transparent-background version of a logo.", "/logo-transparent [logo]"],
-      [1827, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-vector-style", "Recreates the logo with clean vector-like geometry.", "/logo-vector-style [logo]"],
-      [1828, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-color [logo , Instruction]", "Changes logo colors according to the instruction.", "/logo-color [logo , change the logo to white]"],
-      [1829, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-monochrome", "Creates a monochrome version of a logo.", "/logo-monochrome [logo]"],
-      [1830, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-black-white", "Creates a black-and-white logo variation.", "/logo-black-white [logo]"],
-      [1831, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-metallic [logo , Instruction]", "Applies a metallic visual treatment to the logo.", "/logo-metallic [logo , silver chrome finish]"],
-      [1832, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-3d [logo , Instruction]", "Creates a three-dimensional logo presentation.", "/logo-3d [logo , glossy 3D chrome]"],
-      [1833, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-neon [logo , Instruction]", "Creates a neon-style presentation of the logo.", "/logo-neon [logo , blue neon sign]"],
-      [1834, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-mockup [logo , Instruction]", "Places a logo into a realistic brand mockup.", "/logo-mockup [logo , embossed on a business card]"],
-      [1835, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-signboard [logo , Instruction]", "Places a logo onto a realistic signboard.", "/logo-signboard [logo , storefront sign]"],
-      [1836, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-building [logo , Instruction]", "Creates a realistic building branding mockup.", "/logo-building [logo , logo on office building]"],
-      [1837, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-tshirt [logo , Instruction]", "Places a logo onto apparel.", "/logo-tshirt [logo , embroidered on black shirt]"],
-      [1838, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-packaging [logo , Instruction]", "Creates a branded packaging mockup.", "/logo-packaging [logo , premium cardboard box]"],
-      [1839, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/logo-product [logo , image]", "Places a supplied logo onto a product image.", "/logo-product [logo , image]"],
-      [1840, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/brand-mockup [logo , Instruction]", "Creates a professional branding mockup from a logo.", "/brand-mockup [logo , luxury stationery]"],
-      [1841, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "LOGO & BRANDING", "BRANDING", "LOGO INPUT"], "/brand-identity [logo , Instruction]", "Creates a visual brand presentation using the supplied logo.", "/brand-identity [logo , modern technology brand]"],
-      [1842, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/instagram-post [image , Instruction]", "Creates an Instagram-ready composition from an uploaded image.", "/instagram-post [image , premium travel post]"],
-      [1843, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/instagram-story [image , Instruction]", "Creates an Instagram Story composition.", "/instagram-story [image , promotional sale story]"],
-      [1844, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/instagram-reel-cover [image , Instruction]", "Creates an Instagram Reel cover.", "/instagram-reel-cover [image , gaming channel cover]"],
-      [1845, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/facebook-post [image , Instruction]", "Creates a Facebook-ready visual.", "/facebook-post [image , business promotion]"],
-      [1846, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/youtube-thumbnail [image , Instruction]", "Creates a YouTube thumbnail using the uploaded image.", "/youtube-thumbnail [image , make it dramatic with bold text]"],
-      [1847, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/youtube-banner [image , Instruction]", "Creates a YouTube channel banner.", "/youtube-banner [image , gaming channel banner]"],
-      [1848, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/linkedin-post [image , Instruction]", "Creates a professional LinkedIn visual.", "/linkedin-post [image , career achievement]"],
-      [1849, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/linkedin-banner [image , Instruction]", "Creates a LinkedIn banner from an uploaded image.", "/linkedin-banner [image , professional technology theme]"],
-      [1850, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/whatsapp-status [image , Instruction]", "Creates a WhatsApp Status-ready image.", "/whatsapp-status [image , anniversary design]"],
-      [1851, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/social-campaign [image , Instruction]", "Creates a social-media campaign visual from the uploaded image.", "/social-campaign [image , product launch]"],
-      [1852, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SOCIAL MEDIA EDITING", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/social-poster [image , Instruction]", "Creates a social-media promotional poster.", "/social-poster [image , restaurant promotion]"],
-      [1853, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/poster-edit [image , Instruction]", "Transforms an uploaded image into a professional poster.", "/poster-edit [image , music event poster]"],
-      [1854, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/poster-design [image , Instruction]", "Creates a polished poster composition using the supplied image.", "/poster-design [image , college event]"],
-      [1855, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/advertisement [image , Instruction]", "Turns an uploaded image into an advertisement.", "/advertisement [image , luxury product advertisement]"],
-      [1856, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/ad-banner [image , Instruction]", "Creates a digital advertising banner.", "/ad-banner [image , website sale banner]"],
-      [1857, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/promo-poster [image , Instruction]", "Creates a promotional poster from the supplied image.", "/promo-poster [image , 50% discount sale]"],
-      [1858, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/event-poster [image , Instruction]", "Creates an event poster.", "/event-poster [image , college fest]"],
-      [1859, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/business-poster [image , Instruction]", "Creates a professional business poster.", "/business-poster [image , new store opening]"],
-      [1860, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/sale-poster [image , Instruction]", "Creates a sales promotional poster.", "/sale-poster [image , Independence Day sale]"],
-      [1861, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/launch-poster [image , Instruction]", "Creates a product or brand launch poster.", "/launch-poster [image , new smartphone launch]"],
-      [1862, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "POSTER & ADVERTISEMENT", "DESIGN", "SOCIAL MEDIA", "IMAGE INPUT"], "/festival-poster [image , Instruction]", "Creates a festive promotional poster.", "/festival-poster [image , Onam promotion]"],
-      [1863, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/combine-images [image1 , image2]", "Combines two uploaded images into a coherent composition.", "/combine-images [image1 , image2]"],
-      [1864, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/merge-images [image1 , image2 , Instruction]", "Merges multiple images according to the requested composition.", "/merge-images [image1 , image2 , place both people together naturally]"],
-      [1865, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/photo-collage [image1 , image2 , Instruction]", "Creates a collage from multiple uploaded images.", "/photo-collage [image1 , image2 , clean birthday collage]"],
-      [1866, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/group-photo [image1 , image2 , Instruction]", "Combines people from multiple images into one group composition.", "/group-photo [image1 , image2 , create a natural group photo]"],
-      [1867, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/person-transfer [image1 , image2]", "Transfers a subject from one image into another scene.", "/person-transfer [image1 , image2]"],
-      [1868, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/subject-transfer [image1 , image2 , Instruction]", "Places a subject from one image into another image according to instructions.", "/subject-transfer [image1 , image2 , place the person naturally into the second scene]"],
-      [1869, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/face-reference [image1 , image2 , Instruction]", "Uses a supplied reference image to guide facial appearance in another composition.", "/face-reference [image1 , image2 , preserve the person's identity]"],
-      [1870, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/outfit-transfer [image1 , image2]", "Transfers clothing appearance from one image to another subject.", "/outfit-transfer [image1 , image2]"],
-      [1871, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "IMAGE INPUT"], "/style-reference [image , Instruction]", "Uses the uploaded image as a visual style reference for an edit.", "/style-reference [image , apply this lighting style]"],
-      [1872, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "GROUP & MULTIPLE IMAGE EDITING", "MULTI-IMAGE", "MULTI INPUT"], "/composition-reference [image1 , image2]", "Uses one image as a composition reference for another.", "/composition-reference [image1 , image2]"],
-      [1873, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-cartoon [image]", "Transforms a photograph into a cartoon-style illustration.", "/photo-to-cartoon [image]"],
-      [1874, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-anime [image]", "Transforms an image into an anime-inspired illustration.", "/photo-to-anime [image]"],
-      [1875, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-sketch [image]", "Converts a photograph into a sketch-style image.", "/photo-to-sketch [image]"],
-      [1876, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-watercolor [image]", "Converts an image into a watercolor-style artwork.", "/photo-to-watercolor [image]"],
-      [1877, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-oil-painting [image]", "Converts an image into an oil-painting-style artwork.", "/photo-to-oil-painting [image]"],
-      [1878, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-pencil [image]", "Creates a pencil-drawing interpretation of the image.", "/photo-to-pencil [image]"],
-      [1879, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-comic [image]", "Creates a comic-book-style interpretation.", "/photo-to-comic [image]"],
-      [1880, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-pop-art [image]", "Converts the image into a pop-art-inspired composition.", "/photo-to-pop-art [image]"],
-      [1881, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-vintage [image]", "Applies a vintage photographic aesthetic.", "/photo-to-vintage [image]"],
-      [1882, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-film [image]", "Gives an image a cinematic film-photography appearance.", "/photo-to-film [image]"],
-      [1883, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-cinematic [image , Instruction]", "Applies a cinematic visual treatment.", "/photo-to-cinematic [image , dark cinematic lighting]"],
-      [1884, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-fantasy [image , Instruction]", "Transforms an image into a fantasy-inspired scene.", "/photo-to-fantasy [image , magical forest]"],
-      [1885, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-futuristic [image , Instruction]", "Creates a futuristic interpretation of the image.", "/photo-to-futuristic [image , futuristic city]"],
-      [1886, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-cyberpunk [image]", "Applies a cyberpunk-inspired visual transformation.", "/photo-to-cyberpunk [image]"],
-      [1887, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-minimal [image]", "Creates a minimal visual interpretation.", "/photo-to-minimal [image]"],
-      [1888, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ARTISTIC TRANSFORMATIONS", "CREATIVE", "IMAGE INPUT"], "/photo-to-luxury [image]", "Gives an image a premium luxury aesthetic.", "/photo-to-luxury [image]"],
-      [1889, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/scene-change [image , Instruction]", "Changes the environment surrounding the subject.", "/scene-change [image , put the subject in a luxury hotel]"],
-      [1890, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/location-change [image , Instruction]", "Places the subject into a different location.", "/location-change [image , Paris street]"],
-      [1891, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/indoor-to-outdoor [image , Instruction]", "Transforms an indoor scene into an outdoor environment.", "/indoor-to-outdoor [image , tropical garden]"],
-      [1892, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/outdoor-to-indoor [image , Instruction]", "Transforms an outdoor scene into an indoor environment.", "/outdoor-to-indoor [image , modern studio]"],
-      [1893, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/day-to-night [image]", "Converts a daytime scene into a nighttime version.", "/day-to-night [image]"],
-      [1894, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/night-to-day [image]", "Converts a nighttime scene into a daytime version.", "/night-to-day [image]"],
-      [1895, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/weather-change [image , Instruction]", "Changes the apparent weather conditions.", "/weather-change [image , make it a rainy evening]"],
-      [1896, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/season-change [image , Instruction]", "Changes the apparent season.", "/season-change [image , winter]"],
-      [1897, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/sky-replace [image , Instruction]", "Replaces the sky while preserving the scene.", "/sky-replace [image , dramatic sunset sky]"],
-      [1898, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/sunset-edit [image]", "Creates a sunset appearance while preserving the scene.", "/sunset-edit [image]"],
-      [1899, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/golden-hour [image]", "Gives the scene a golden-hour lighting appearance.", "/golden-hour [image]"],
-      [1900, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ENVIRONMENT & SCENE CHANGES", "PHOTO EDITING", "IMAGE INPUT"], "/night-cinematic [image]", "Converts the scene into a cinematic nighttime composition.", "/night-cinematic [image]"],
-      [1901, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/image-crop [image , Instruction]", "Crops an image according to the requested composition.", "/image-crop [image , square crop centered on subject]"],
-      [1902, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/image-resize [image , Instruction]", "Resizes an image to the requested dimensions or aspect ratio.", "/image-resize [image , 16:9]"],
-      [1903, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/aspect-ratio [image , Instruction]", "Reframes an image into the requested aspect ratio.", "/aspect-ratio [image , 9:16]"],
-      [1904, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/portrait-to-landscape [image]", "Reframes a portrait image into a landscape composition.", "/portrait-to-landscape [image]"],
-      [1905, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/landscape-to-portrait [image]", "Reframes a landscape image into a portrait composition.", "/landscape-to-portrait [image]"],
-      [1906, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/square-image [image]", "Creates a square composition suitable for social media.", "/square-image [image]"],
-      [1907, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/thumbnail-crop [image , Instruction]", "Creates a thumbnail-optimized crop.", "/thumbnail-crop [image , center the face]"],
-      [1908, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/composition-fix [image , Instruction]", "Improves framing and composition while preserving the subject.", "/composition-fix [image , place subject using rule of thirds]"],
-      [1909, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/center-subject [image]", "Reframes the image to center the primary subject.", "/center-subject [image]"],
-      [1910, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "RESIZE CROP & COMPOSITION", "PHOTO EDITING", "IMAGE INPUT"], "/expand-canvas [image , Instruction]", "Expands the canvas while generating plausible surrounding content.", "/expand-canvas [image , expand upward]"],
-      [1911, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/text-on-image [image , Instruction]", "Adds specified text to an uploaded image.", "/text-on-image [image , add \"SALE 50%\" at the top]"],
-      [1912, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/remove-text [image , Instruction]", "Removes specified visible text from an image.", "/remove-text [image , remove the watermark text]"],
-      [1913, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/replace-text [image , Instruction]", "Replaces visible text with specified text while matching the design.", "/replace-text [image , replace \"2025\" with \"2026\"]"],
-      [1914, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/poster-text [image , Instruction]", "Adds professionally arranged poster text to an image.", "/poster-text [image , add event title and date]"],
-      [1915, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "LOGO INPUT"], "/logo-text [logo , Instruction]", "Creates or modifies text associated with a supplied logo.", "/logo-text [logo , add \"Technologies\"]"],
-      [1916, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/sign-text [image , Instruction]", "Changes readable text on a sign within an image.", "/sign-text [image , change store name]"],
-      [1917, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/menu-edit [image , Instruction]", "Edits text and layout within a menu image.", "/menu-edit [image , change the price]"],
-      [1918, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/certificate-edit [image , Instruction]", "Creates permitted design/layout edits to a certificate image.", "/certificate-edit [image , improve layout]"],
-      [1919, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/document-clean [image]", "Cleans a photographed document while preserving its content.", "/document-clean [image]"],
-      [1920, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "TEXT & IMAGE", "TEXT EDITING", "IMAGE INPUT"], "/document-enhance [image]", "Improves readability of a photographed document.", "/document-enhance [image]"],
-      [1921, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/study-image [image , Instruction]", "Converts an uploaded image into a cleaner educational study visual.", "/study-image [image , highlight the important structures]"],
-      [1922, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/diagram-clean [image]", "Cleans and improves a photographed educational diagram.", "/diagram-clean [image]"],
-      [1923, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/diagram-label [image , Instruction]", "Adds requested labels to an educational diagram.", "/diagram-label [image , label all cranial nerves]"],
-      [1924, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/diagram-unlabel [image]", "Removes labels to create a self-testing diagram.", "/diagram-unlabel [image]"],
-      [1925, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/medical-diagram-clean [image]", "Cleans a medical diagram while preserving anatomical information.", "/medical-diagram-clean [image]"],
-      [1926, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/medical-diagram-enhance [image]", "Improves readability and clarity of a medical diagram.", "/medical-diagram-enhance [image]"],
-      [1927, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/medical-image-label [image , Instruction]", "Adds educational labels to a medical image.", "/medical-image-label [image , label the parts of the nephron]"],
-      [1928, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/medical-image-highlight [image , Instruction]", "Highlights specified anatomical or pathological structures.", "/medical-image-highlight [image , highlight the mitral valve]"],
-      [1929, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/medical-image-color [image , Instruction]", "Applies educational color coding to medical structures.", "/medical-image-color [image , color arteries red and veins blue]"],
-      [1930, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "STUDENT & EDUCATION IMAGE EDITING", "MEDICAL", "MBBS", "IMAGE INPUT"], "/medical-image-annotate [image , Instruction]", "Adds educational annotations to a medical image.", "/medical-image-annotate [image , mark the important structures]"],
-      [1931, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BEFORE & AFTER", "PHOTO EDITING", "IMAGE INPUT"], "/before-after [image , Instruction]", "Creates a clear before-and-after comparison based on the requested modification.", "/before-after [image , show original vs enhanced]"],
-      [1932, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BEFORE & AFTER", "PHOTO EDITING", "IMAGE INPUT"], "/edit-preview [image , Instruction]", "Creates a visual representation of the requested edit while preserving the original subject.", "/edit-preview [image , cinematic lighting]"],
-      [1933, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BEFORE & AFTER", "PHOTO EDITING", "IMAGE INPUT"], "/compare-edit [image , Instruction]", "Shows the original and edited versions side by side.", "/compare-edit [image , remove background]"],
-      [1934, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BEFORE & AFTER", "PHOTO EDITING", "IMAGE INPUT"], "/version-variations [image , Instruction]", "Creates multiple visual variations based on the same uploaded image.", "/version-variations [image , create three background options]"],
-      [1935, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/preserve-face [image , Instruction]", "Performs an image edit while prioritizing preservation of the subject's facial identity.", "/preserve-face [image , change the background to a studio]"],
-      [1936, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/preserve-identity [image , Instruction]", "Performs an edit while preserving the subject's recognizable identity.", "/preserve-identity [image , change clothing]"],
-      [1937, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/preserve-pose [image , Instruction]", "Performs an edit while maintaining the original pose.", "/preserve-pose [image , change the background]"],
-      [1938, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/preserve-composition [image , Instruction]", "Edits specified elements while preserving the original composition.", "/preserve-composition [image , change only the shirt]"],
-      [1939, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/preserve-lighting [image , Instruction]", "Performs an edit while maintaining the existing lighting direction and character.", "/preserve-lighting [image , replace the background]"],
-      [1940, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/realistic-edit [image , Instruction]", "Creates a realistic image edit that integrates the requested changes naturally.", "/realistic-edit [image , add a coffee cup]"],
-      [1941, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/natural-edit [image , Instruction]", "Applies subtle, natural-looking modifications.", "/natural-edit [image , remove minor blemishes]"],
-      [1942, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/seamless-edit [image , Instruction]", "Integrates an edit seamlessly into the original image.", "/seamless-edit [image , remove the person in the background]"],
-      [1943, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/photorealistic-edit [image , Instruction]", "Creates a photorealistic version of the requested edit.", "/photorealistic-edit [image , replace the wall]"],
-      [1944, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/professional-edit [image , Instruction]", "Applies professional photo-editing principles to the requested change.", "/professional-edit [image , improve lighting and composition]"],
-      [1945, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/studio-edit [image , Instruction]", "Gives an image a controlled professional studio appearance.", "/studio-edit [image , premium product lighting]"],
-      [1946, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "ADVANCED IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/commercial-edit [image , Instruction]", "Optimizes an image for commercial presentation.", "/commercial-edit [image , luxury product advertisement]"],
-      [1947, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "MULTI INPUT"], "/product-on-model [image1 , image2 , Instruction]", "Places a product from one image naturally onto a model from another image.", "/product-on-model [image1 , image2 , place the watch naturally on the model]"],
-      [1948, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "MULTI INPUT"], "/product-in-hand [image1 , image2 , Instruction]", "Places a product into a person's hand while matching perspective and lighting.", "/product-in-hand [image1 , image2 , place the phone in the person's hand]"],
-      [1949, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "IMAGE INPUT"], "/product-on-desk [image , Instruction]", "Places the supplied product into a realistic desk environment.", "/product-on-desk [image , modern gaming desk]"],
-      [1950, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "IMAGE INPUT"], "/product-on-shelf [image , Instruction]", "Places a product into a realistic shelf display.", "/product-on-shelf [image , premium retail shelf]"],
-      [1951, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "IMAGE INPUT"], "/product-billboard [image , Instruction]", "Creates a billboard advertisement using the supplied product image.", "/product-billboard [image , city billboard advertisement]"],
-      [1952, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "IMAGE INPUT"], "/product-storefront [image , Instruction]", "Creates a storefront branding visualization.", "/product-storefront [image , premium electronics store]"],
-      [1953, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "LOGO INPUT"], "/product-bag [logo , Instruction]", "Places a supplied logo onto realistic shopping-bag packaging.", "/product-bag [logo , luxury paper bag]"],
-      [1954, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "LOGO INPUT"], "/product-box [logo , Instruction]", "Creates branded product-box packaging using a supplied logo.", "/product-box [logo , premium black packaging]"],
-      [1955, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "LOGO INPUT"], "/brand-wall [logo , Instruction]", "Creates a branded office or event wall using the supplied logo.", "/brand-wall [logo , modern office reception]"],
-      [1956, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "BRAND & PRODUCT COMPOSITES", "BRANDING", "LOGO INPUT"], "/brand-merchandise [logo , Instruction]", "Creates branded merchandise mockups.", "/brand-merchandise [logo , branded hoodie and cap]"],
-      [1957, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "MULTI INPUT"], "/image-composite [image1 , image2 , Instruction]", "Creates a coherent composite from multiple images.", "/image-composite [image1 , image2 , combine both scenes naturally]"],
-      [1958, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-reference [image , Instruction]", "Uses the uploaded image as a reference while following the requested transformation.", "/image-reference [image , recreate this composition as a professional advertisement]"],
-      [1959, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "MULTI INPUT"], "/two-image-edit [image1 , image2 , Instruction]", "Uses two uploaded images as references for a single edit.", "/two-image-edit [image1 , image2 , use the background from image2]"],
-      [1960, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "MULTI INPUT"], "/multi-image-edit [image1 , image2 , image3 , Instruction]", "Uses multiple uploaded images to create one coherent composition.", "/multi-image-edit [image1 , image2 , image3 , create a professional collage]"],
-      [1961, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/reference-and-edit [image , Instruction]", "Uses the supplied image as the source and applies the requested transformation.", "/reference-and-edit [image , convert this into a professional advertisement]"],
-      [1962, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-poster [image , Instruction]", "Converts an uploaded image into a complete poster design.", "/image-to-poster [image , medical awareness poster]"],
-      [1963, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-ad [image , Instruction]", "Converts an uploaded image into an advertisement.", "/image-to-ad [image , premium smartphone advertisement]"],
-      [1964, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-banner [image , Instruction]", "Converts an uploaded image into a web or social-media banner.", "/image-to-banner [image , website hero banner]"],
-      [1965, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-thumbnail [image , Instruction]", "Converts an uploaded image into a high-impact thumbnail.", "/image-to-thumbnail [image , YouTube gaming thumbnail]"],
-      [1966, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-profile [image , Instruction]", "Converts an uploaded image into a professional profile image.", "/image-to-profile [image , LinkedIn profile photo]"],
-      [1967, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-product [image , Instruction]", "Converts a casual product photograph into a professional product presentation.", "/image-to-product [image , e-commerce product image]"],
-      [1968, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-catalog [image , Instruction]", "Converts a product image into a catalog-ready presentation.", "/image-to-catalog [image , clean white background]"],
-      [1969, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "SPECIAL MULTI-INPUT", "MULTI-IMAGE", "IMAGE INPUT"], "/image-to-social [image , Instruction]", "Converts an uploaded image into a social-media-ready design.", "/image-to-social [image , Instagram promotional post]"],
-      [1970, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/edit [image , Instruction]", "Performs any requested edit on the uploaded image.", "/edit [image , remove the wires]"],
-      [1971, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/fix [image , Instruction]", "Fixes a specific visual problem in an uploaded image.", "/fix [image , correct the distorted background]"],
-      [1972, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/change [image , Instruction]", "Changes a specified element while preserving the rest of the image.", "/change [image , change the sky]"],
-      [1973, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/remove [image , Instruction]", "Removes specified unwanted elements from an image.", "/remove [image , remove all people in the background]"],
-      [1974, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/add [image , Instruction]", "Adds a requested element to an image.", "/add [image , add flowers to the table]"],
-      [1975, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/replace [image , Instruction]", "Replaces a specified element with another.", "/replace [image , replace the background with a beach]"],
-      [1976, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/restore [image]", "Restores and improves a damaged or old image.", "/restore [image]"],
-      [1977, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/enhance [image]", "Improves image quality while preserving the original content.", "/enhance [image]"],
-      [1978, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/recreate [image , Instruction]", "Recreates the visual according to the requested style or composition.", "/recreate [image , recreate as a professional advertisement]"],
-      [1979, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/transform [image , Instruction]", "Transforms the uploaded image according to the specified creative direction.", "/transform [image , turn this into a cinematic poster]"],
-      [1980, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/professionalize [image , Instruction]", "Gives an image a more professional visual presentation.", "/professionalize [image , make this look like a professional product photograph]"],
-      [1981, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/cleanup [image , Instruction]", "Cleans unwanted visual elements from an image.", "/cleanup [image , remove wires and clutter]"],
-      [1982, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/retouch [image , Instruction]", "Performs targeted photographic retouching.", "/retouch [image , clean skin and improve lighting]"],
-      [1983, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/remaster [image , Instruction]", "Creates a higher-quality remastered version of an image.", "/remaster [image , improve overall quality while preserving details]"],
-      [1984, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/upgrade [image , Instruction]", "Upgrades the visual presentation while following the supplied instructions.", "/upgrade [image , make this look premium]"],
-      [1985, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/restyle [image , Instruction]", "Restyles an image while preserving the important subject matter.", "/restyle [image , luxury editorial style]"],
-      [1986, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/reframe [image , Instruction]", "Changes the framing or composition of an image.", "/reframe [image , create a vertical 9:16 composition]"],
-      [1987, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/recolor [image , Instruction]", "Recolors specified elements while preserving their structure.", "/recolor [image , make the car red]"],
-      [1988, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/relight [image , Instruction]", "Changes the lighting direction, intensity, or atmosphere.", "/relight [image , dramatic studio lighting]"],
-      [1989, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/recompose [image , Instruction]", "Reorganizes the visual composition while preserving the main subject.", "/recompose [image , place the subject on the right side]"],
-      [1990, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/modernize [image , Instruction]", "Gives an older visual a modern design treatment.", "/modernize [image , modern advertisement style]"],
-      [1991, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/minimalize [image , Instruction]", "Simplifies the visual composition while retaining the main subject.", "/minimalize [image , clean minimalist product design]"],
-      [1992, ["IMAGE EDITING & TRANSFORMATION", "IMAGE EDITING", "UNIVERSAL IMAGE EDITING", "PHOTO EDITING", "IMAGE INPUT"], "/premiumize [image , Instruction]", "Gives an image a premium commercial appearance.", "/premiumize [image , luxury brand aesthetic]"],
-];
+      const gameKeys = ["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d", "enter", " ", "space"];
       if (!gameKeys.includes(k)) return;
-
       e.preventDefault();
       e.stopPropagation();
 
@@ -5241,7 +6125,6 @@
         else if (k === "arrowdown" || k === "s") handleGameAction("down");
         else if (k === "arrowleft" || k === "a") handleGameAction("left");
         else if (k === "arrowright" || k === "d") handleGameAction("right");
-        // Tetris keeps its original Arrow/WASD controls; Enter/Space remain intercepted only while a game is open.
       }
     });
 
