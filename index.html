@@ -1793,7 +1793,338 @@
       .ai-tool-item { border-radius: 12px; }
       .ai-tool-link { font-size: .84rem; }
     }
+  
+/* ==========================================================================
+   &AI / JAVA ASSISTANT — isolated integration styles
+   ========================================================================== */
+.java-ai-toggle {
+  --java-glow: rgba(99,102,241,.34);
+  position: relative;
+  isolation: isolate;
+  min-height: 44px;
+  padding: 9px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font: 700 .84rem var(--font-main);
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+.java-ai-toggle::before {
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  background: linear-gradient(110deg, transparent, rgba(99,102,241,.10), transparent);
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+}
+.java-ai-toggle:hover::before { transform:translateX(120%); }
+.java-ai-toggle:hover { transform:translateY(-2px); border-color:var(--glass-border-focus); }
+.java-ai-toggle .java-ai-orb {
+  width: 23px; height:23px; border-radius:50%;
+  display:grid; place-items:center; font-size:.84rem;
+  background:rgba(148,163,184,.12);
+  border:1px solid var(--glass-border);
+  transition:var(--transition-smooth);
+}
+.java-ai-toggle .java-ai-state { color:var(--text-muted); font-size:.7rem; letter-spacing:.05em; }
+.java-ai-toggle.is-on {
+  border-color:rgba(99,102,241,.65);
+  box-shadow:0 0 0 1px rgba(99,102,241,.12), 0 0 26px var(--java-glow), var(--glass-shadow);
+}
+.java-ai-toggle.is-on .java-ai-orb {
+  background:var(--accent-gradient);
+  border-color:transparent;
+  box-shadow:0 0 16px rgba(168,85,247,.55);
+  animation:javaOrbPulse 2.2s ease-in-out infinite;
+}
+.java-ai-toggle.is-on .java-ai-state { color:#34d399; }
+.java-ai-toggle.is-on::after {
+  content:""; position:absolute; inset:-45%;
+  border-radius:50%;
+  background:conic-gradient(from 0deg, transparent 0 72%, rgba(255,255,255,.20), transparent 80%);
+  animation:javaOrbit 5s linear infinite;
+  pointer-events:none;
+}
+@keyframes javaOrbPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+@keyframes javaOrbit { to { transform:rotate(360deg); } }
+
+.java-ai-fab {
+  position:fixed;
+  right:max(18px, env(safe-area-inset-right));
+  bottom:max(18px, env(safe-area-inset-bottom));
+  z-index:9998;
+  min-width:72px; min-height:58px;
+  padding:9px 13px;
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  background:var(--menu-bg);
+  color:var(--text-main);
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  cursor:pointer; font:800 .78rem var(--font-main);
+  transition:var(--transition-smooth);
+}
+.java-ai-fab:hover { transform:translateY(-3px) scale(1.02); border-color:var(--glass-border-focus); }
+.java-ai-fab .java-fab-icon { font-size:1.15rem; }
+.java-ai-fab .java-fab-state { display:block; font-size:.64rem; color:var(--text-muted); }
+.java-ai-fab.is-on { border-color:rgba(99,102,241,.62); box-shadow:0 0 30px rgba(99,102,241,.18),0 18px 44px rgba(0,0,0,.34); }
+.java-ai-fab.is-on .java-fab-icon { filter:drop-shadow(0 0 7px rgba(168,85,247,.75)); }
+
+.java-ai-panel {
+  position:fixed;
+  right:max(20px, env(safe-area-inset-right));
+  bottom:max(88px, calc(env(safe-area-inset-bottom) + 72px));
+  z-index:9997;
+  width:min(430px, calc(100vw - 32px));
+  height:min(650px, calc(100dvh - 120px));
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid var(--glass-border);
+  border-radius:24px;
+  background:var(--modal-bg);
+  box-shadow:0 30px 80px rgba(0,0,0,.48), 0 0 36px rgba(99,102,241,.12);
+  backdrop-filter:blur(30px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+}
+.java-ai-panel.active { display:flex; animation:javaPanelIn .25s cubic-bezier(.16,1,.3,1) forwards; }
+@keyframes javaPanelIn { from{opacity:0;transform:translateY(12px) scale(.97)} to{opacity:1;transform:none} }
+.java-ai-panel-header {
+  flex:0 0 auto; padding:15px 16px 13px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  border-bottom:1px solid var(--glass-border);
+  background:linear-gradient(120deg,rgba(99,102,241,.10),transparent 50%,rgba(236,72,153,.07));
+}
+.java-ai-title-row { display:flex; align-items:center; gap:10px; min-width:0; }
+.java-ai-avatar {
+  width:38px; height:38px; flex:0 0 38px; border-radius:13px;
+  display:grid; place-items:center; font-size:1.05rem;
+  background:var(--accent-gradient); color:#fff;
+  box-shadow:0 0 18px rgba(99,102,241,.32);
+}
+.java-ai-title { font-size:1rem; font-weight:800; line-height:1.15; }
+.java-ai-subtitle { font-size:.66rem; color:var(--text-muted); margin-top:3px; }
+.java-ai-header-actions { display:flex; align-items:center; gap:5px; }
+.java-icon-btn {
+  width:36px; height:36px; border-radius:11px; border:1px solid transparent;
+  background:transparent; color:var(--text-muted); display:grid; place-items:center;
+  cursor:pointer; transition:var(--transition-fast);
+}
+.java-icon-btn:hover { color:var(--text-main); background:var(--glass-bg); border-color:var(--glass-border); }
+.java-ai-menu {
+  position:absolute; right:12px; top:58px; width:230px; padding:7px;
+  display:none; flex-direction:column; gap:3px; z-index:4;
+  border:1px solid var(--glass-border); border-radius:15px;
+  background:var(--menu-bg); box-shadow:0 22px 46px rgba(0,0,0,.4);
+}
+.java-ai-menu.active { display:flex; animation:menuPop .2s ease forwards; }
+.java-ai-menu button {
+  border:0; background:transparent; color:var(--text-main); border-radius:10px;
+  padding:10px 11px; text-align:left; cursor:pointer; font:600 .78rem var(--font-main);
+  display:flex; align-items:center; gap:9px;
+}
+.java-ai-menu button:hover { background:rgba(99,102,241,.13); color:var(--accent); }
+
+.java-ai-messages {
+  flex:1 1 auto; min-height:0; overflow:auto; padding:16px 14px;
+  display:flex; flex-direction:column; gap:11px; scrollbar-width:thin;
+}
+.java-msg {
+  max-width:92%; padding:11px 13px; border-radius:15px; font-size:.82rem; line-height:1.55;
+  overflow-wrap:anywhere;
+}
+.java-msg.ai { align-self:flex-start; background:var(--glass-bg-card); border:1px solid var(--glass-border); }
+.java-msg.user { align-self:flex-end; color:#fff; background:var(--accent-gradient); border:1px solid transparent; }
+.java-msg .java-msg-meta { display:block; margin-top:5px; font-size:.62rem; opacity:.65; }
+.java-search-state { display:inline-flex; align-items:center; gap:7px; color:var(--text-muted); }
+.java-search-dot { width:7px;height:7px;border-radius:50%;background:var(--accent); animation:javaDot 1s ease-in-out infinite; }
+@keyframes javaDot { 0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)} }
+
+.java-result-list { display:grid; gap:8px; margin-top:9px; }
+.java-result-card {
+  padding:11px; border:1px solid var(--glass-border); border-radius:14px;
+  background:rgba(255,255,255,.025); box-shadow:var(--glass-shadow);
+}
+.java-result-card h4 { font-size:.79rem; margin-bottom:4px; }
+.java-result-card p { font-size:.71rem; line-height:1.45; color:var(--text-muted); }
+.java-result-meta { margin:7px 0; display:flex; flex-wrap:wrap; gap:5px; }
+.java-result-tag { font-size:.61rem; color:var(--badge-text); background:var(--badge-bg); padding:3px 7px; border-radius:999px; }
+.java-result-actions { display:flex; gap:6px; margin-top:8px; }
+.java-result-actions button {
+  flex:1; border:1px solid var(--glass-border); background:var(--glass-bg);
+  color:var(--text-main); border-radius:9px; padding:7px 8px; cursor:pointer; font:700 .68rem var(--font-main);
+}
+.java-result-actions button:hover { border-color:var(--accent); color:var(--accent); }
+
+.java-ai-composer {
+  flex:0 0 auto; padding:10px 12px max(11px, env(safe-area-inset-bottom));
+  border-top:1px solid var(--glass-border); background:var(--glass-bg);
+}
+.java-input-row { display:flex; align-items:flex-end; gap:7px; }
+.java-ai-textarea {
+  flex:1; min-width:0; max-height:130px; resize:none;
+  padding:11px 12px; border-radius:14px; border:1px solid var(--glass-border);
+  background:var(--glass-bg-card); color:var(--text-main); outline:none;
+  font:600 .82rem/1.45 var(--font-main);
+}
+.java-ai-textarea:focus { border-color:var(--glass-border-focus); box-shadow:0 0 0 3px rgba(99,102,241,.10); }
+.java-send-btn, .java-mic-btn {
+  width:42px; height:42px; flex:0 0 42px; border-radius:13px; border:1px solid var(--glass-border);
+  background:var(--glass-bg); color:var(--text-main); display:grid; place-items:center;
+  cursor:pointer; transition:var(--transition-fast);
+}
+.java-send-btn { background:var(--accent-gradient); color:#fff; border-color:transparent; }
+.java-send-btn:hover, .java-mic-btn:hover { transform:translateY(-1px); border-color:var(--accent); }
+.java-mic-btn.listening { background:#ef4444; color:#fff; border-color:#ef4444; animation:javaMicPulse 1.15s ease-in-out infinite; }
+@keyframes javaMicPulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.25)}50%{box-shadow:0 0 0 9px rgba(239,68,68,0)} }
+.java-composer-hint { margin:6px 3px 0; font-size:.61rem; color:var(--text-sub); }
+.java-ai-status { display:flex; align-items:center; gap:6px; margin-top:7px; font-size:.62rem; color:var(--text-muted); }
+.java-status-dot { width:7px;height:7px;border-radius:50%;background:#94a3b8; }
+.java-status-dot.on { background:#22c55e; box-shadow:0 0 9px rgba(34,197,94,.6); }
+.java-status-dot.busy { background:#a78bfa; animation:javaDot 1s infinite; }
+.java-status-dot.error { background:#ef4444; }
+
+.java-settings-modal .glass-modal { max-width:560px; text-align:left; align-items:stretch; }
+.java-settings-title { padding-right:32px; }
+.java-settings-section { border-top:1px solid var(--glass-border); padding-top:16px; margin-top:16px; }
+.java-settings-section:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+.java-settings-label { display:block; font-size:.73rem; font-weight:800; color:var(--text-muted); margin-bottom:7px; text-transform:uppercase; letter-spacing:.05em; }
+.java-status-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 12px; border:1px solid var(--glass-border); border-radius:13px; background:var(--glass-bg-card); }
+.java-status-copy strong { display:block; font-size:.84rem; }
+.java-status-copy span { font-size:.67rem; color:var(--text-muted); }
+.java-switch { width:48px; height:28px; border:0; border-radius:999px; padding:3px; background:#475569; cursor:pointer; transition:.25s; }
+.java-switch::after { content:""; display:block; width:22px;height:22px;border-radius:50%;background:#fff; transition:.25s; }
+.java-switch.on { background:#22c55e; }
+.java-switch.on::after { transform:translateX(20px); }
+.java-key-wrap { position:relative; }
+.java-key-input, .java-name-input, .java-select {
+  width:100%; height:44px; padding:0 45px 0 13px; border:1px solid var(--glass-border);
+  border-radius:12px; background:var(--glass-bg-card); color:var(--text-main);
+  outline:none; font:600 .82rem var(--font-main);
+}
+.java-name-input, .java-select { padding-right:13px; }
+.java-key-input:focus,.java-name-input:focus,.java-select:focus { border-color:var(--glass-border-focus); box-shadow:0 0 0 3px rgba(99,102,241,.10); }
+.java-key-eye { position:absolute; right:5px; top:5px; width:34px;height:34px;border:0;background:transparent;color:var(--text-muted);cursor:pointer;border-radius:9px; }
+.java-key-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
+.java-key-actions button, .java-link-btn {
+  border:1px solid var(--glass-border); border-radius:10px; background:var(--glass-bg);
+  color:var(--text-main); padding:9px 11px; cursor:pointer; font:700 .72rem var(--font-main);
+  text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px;
+}
+.java-key-actions .primary, .java-link-btn.primary { background:var(--accent-gradient); border-color:transparent; color:#fff; }
+.java-key-actions .danger { color:#fca5a5; }
+.java-key-status { margin-top:7px; font-size:.69rem; color:var(--text-muted); min-height:18px; }
+.java-security-note { margin-top:8px; font-size:.67rem; line-height:1.5; color:var(--text-sub); }
+.java-profile-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.java-setting-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 0; }
+.java-setting-row span { font-size:.77rem; color:var(--text-muted); }
+.java-setting-row button { flex:0 0 auto; }
+
+.java-tutorial { text-align:left; }
+.java-tutorial ol { margin:0 0 16px 20px; color:var(--text-muted); }
+.java-tutorial li { margin:9px 0; font-size:.78rem; line-height:1.5; }
+.java-tutorial strong { color:var(--text-main); }
+.java-powered { margin-top:13px; font-size:.66rem; color:var(--text-sub); text-align:center; }
+.java-powered b { color:var(--text-muted); }
+
+@media (max-width: 760px) {
+  .java-ai-toggle { padding:8px 10px; gap:6px; }
+  .java-ai-toggle .java-ai-state { display:none; }
+  .java-ai-toggle .java-ai-orb { width:25px;height:25px; }
+  .java-ai-fab { right:max(12px,env(safe-area-inset-right)); bottom:max(12px,env(safe-area-inset-bottom)); min-width:66px; min-height:54px; border-radius:18px; }
+  .java-ai-panel {
+    left:0; right:0; bottom:0; width:100%; height:min(88dvh,760px); max-height:calc(100dvh - 10px);
+    border-radius:22px 22px 0 0; border-bottom:0;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .java-ai-panel.active { animation:javaSheetIn .28s cubic-bezier(.16,1,.3,1) forwards; }
+  @keyframes javaSheetIn { from{opacity:0;transform:translateY(100%)} to{opacity:1;transform:none} }
+  .java-ai-messages { padding:14px 11px; }
+  .java-ai-composer { padding-left:10px; padding-right:10px; }
+  .java-settings-modal { align-items:flex-end; padding:0; }
+  .java-settings-modal .glass-modal {
+    max-width:none; max-height:92dvh; border-radius:22px 22px 0 0;
+    padding:22px 16px max(18px,env(safe-area-inset-bottom));
+  }
+}
+@media (max-width: 420px) {
+  .java-ai-title { font-size:.92rem; }
+  .java-ai-subtitle { font-size:.6rem; }
+  .java-ai-fab .java-fab-label { display:none; }
+  .java-ai-fab { min-width:56px; width:56px; padding:8px; }
+  .java-profile-grid { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .java-ai-toggle, .java-ai-fab, .java-ai-panel, .java-ai-toggle::before,
+  .java-ai-toggle.is-on::after, .java-ai-toggle.is-on .java-ai-orb,
+  .java-mic-btn.listening, .java-search-dot, .java-status-dot.busy { animation:none !important; transition:none !important; }
+}
+
   </style>
+
+<style id="java-desktop-fullscreen-layout">
+/* &AI — Full-screen desktop layout */
+@media (min-width: 901px) {
+  html, body {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 20px;
+  }
+
+  .app-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  header,
+  .control-panel,
+  .prompt-grid,
+  .site-footer {
+    width: 100%;
+  }
+
+  .prompt-grid {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
+}
+
+/* Extra-wide desktop: use the available screen instead of a centered 1400px cap */
+@media (min-width: 1440px) {
+  .app-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .prompt-grid {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Keep mobile/tablet layout unchanged */
+@media (max-width: 900px) {
+  .app-container {
+    max-width: 1400px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1931,7 +2262,6 @@
     </section>
 
     <main class="prompt-grid" id="promptGrid"></main>
-
 
     <!-- 1000 Codes Footer -->
     <footer class="site-footer" aria-label="1000 Codes footer">
@@ -6203,6 +6533,5 @@
       });
     })();
   </script>
-
 </body>
 </html>
